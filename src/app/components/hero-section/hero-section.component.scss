@@ -1,0 +1,69 @@
+/* HERO SECTION STYLING */
+.hero-section {
+  background: url("../../../assets/images/Background.png") no-repeat center
+    center;
+  background-size: cover;
+  background-attachment: fixed; /* Optional: Creates a parallax effect */
+  color: white;
+  padding: 100px 0;
+  position: relative;
+  max-height: 500px;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+  z-index: 1;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.head-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary-color, #ffd700); /* Gold color for branding */
+}
+
+.main-title {
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.sub-title {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+/* Image Styling */
+.hero-img {
+  max-width: 50%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.hero-img:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 992px) {
+  .hero-section {
+    text-align: center;
+    padding: 60px 20px;
+
+    max-height: 800px;
+  }
+
+  .hero-img {
+    max-width: 70%;
+    margin-top: 20px;
+  }
+}

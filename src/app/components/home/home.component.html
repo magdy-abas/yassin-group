@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<app-hero-section></app-hero-section>
+
+
+<section class="discover-section py-5">
+  <div class="container">
+    <h2 class="text-white mb-4">Discover</h2>
+
+    <div class="row g-4">
+      @for (product of products; track product.id; let i = $index) {
+      <div class="col-12 col-md-6 col-lg-3">
+        <mat-card class="product-card" [class.featured]="product.featured">
+          <img src="assets/images/product-bg.png" class="bg-shape-img" alt="bg-img-shape">
+
+          <div class="product-image">
+            <img [src]="product.imageUrl" [alt]="product.title" class="img-fluid">
+          </div>
+
+          <mat-expansion-panel hideToggle class="product-info-panel" [expanded]="expandedIndex === i"
+            (afterExpand)="expandedIndex = i" (afterCollapse)="expandedIndex = -1">
+            <mat-expansion-panel-header class="product-info">
+              <mat-panel-title>
+                <h5>{{ product.title }}</h5>
+              </mat-panel-title>
+              <mat-panel-description>
+                <button mat-raised-button color="warn" class="toggle-info-btn">
+                  Details
+                </button>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <p class="product-description">{{product.description}}</p>
+          </mat-expansion-panel>
+        </mat-card>
+      </div>
+      }
+    </div>
+
+    <div class="text-center mt-5">
+      <button mat-stroked-button color="accent">
+        View More
+        <mat-icon>expand_more</mat-icon>
+      </button>
+    </div>
+  </div>
+</section>
