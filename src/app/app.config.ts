@@ -15,6 +15,7 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions(),
       withInMemoryScrolling({ scrollPositionRestoration: 'top' })
     ),
-    provideHttpClient(withFetch()), provideAnimationsAsync(),
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync(),
   ],
 };

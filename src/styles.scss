@@ -66,7 +66,7 @@
   --btn2-font-weight: 700;
   --btn2-font-style: normal;
 }
-
+// global
 body {
   // font-family: "Cairo", serif;
   font-family: "Poppins", serif;
@@ -82,5 +82,28 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+h2.main-title {
+  font-size: 2rem;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--secondry-color);
+    border-radius: 2px;
+  }
+}

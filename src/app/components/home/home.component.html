@@ -4,7 +4,7 @@
 
 <section class="discover-section py-5">
   <div class="container">
-    <h2 class="text-white mb-4">Discover</h2>
+    <h2 class="text-white main-title mb-4">Discover</h2>
 
     <div class="row g-4">
       @for (product of products; track product.id; let i = $index) {
@@ -36,11 +36,221 @@
       }
     </div>
 
-    <div class="text-center mt-5">
+    <div class="text-center mt-5 ">
       <button mat-stroked-button color="accent">
         View More
         <mat-icon>expand_more</mat-icon>
       </button>
     </div>
   </div>
+</section>
+
+
+<section class="about-us-section py-2">
+  <div class="container ">
+    <h2 class="text-white main-title mb-4">About Us</h2>
+    <!-- First Row: Logo and About -->
+    <div class="row justify-content-center align-items-stretch">
+      <!-- Logo -->
+      <div class="col-md-6">
+        <div class="logo-box   text-white rounded shadow h-100 d-flex align-items-center justify-content-center">
+          <img src="../../../assets/images/big-logo.png" alt="Yassin Group Logo" class="img-fluid">
+        </div>
+      </div>
+      <!-- About Yassin Group -->
+      <div class="col-md-6 ">
+        <div class="p-4 text-box  text-white rounded shadow h-100 d-flex flex-column">
+          <h2 class="text-warning">About Yassin Group</h2>
+          <p class="mt-3">
+            Leading company specialized in the manufacturing of hookah glass. Established to meet both local and global
+            market demands in the hookah industry, we offer high-quality products featuring modern technology and
+            innovative designs that cater to a variety of tastes.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Row: Vision, Mission, and History -->
+    <div class="row mt-5">
+      <!-- Vision -->
+      <div class="col-md-4">
+        <div class="p-4 text-white rounded shadow h-100 d-flex flex-column">
+          <h3 class="text-warning ">
+            <i class="fas fa-eye"></i> Our Vision
+          </h3>
+          <p class="mt-3">
+            We aim to be the world leader in the hookah glass manufacturing industry, focusing on innovation and quality
+            in every aspect of our work.
+          </p>
+        </div>
+      </div>
+      <!-- Mission -->
+      <div class="col-md-4">
+        <div class="p-4  text-white rounded shadow h-100 d-flex flex-column">
+          <h3 class="text-warning">
+            <i class="fas fa-bullseye"></i> Our Mission
+          </h3>
+          <p class="mt-3">
+            We strive to be the ideal partner for our customers in the hookah industry, using the latest technologies
+            and high-quality materials to ensure product durability and performance.
+          </p>
+        </div>
+      </div>
+      <!-- History -->
+      <div class="col-md-4">
+        <div class="p-4  text-white rounded shadow h-100 d-flex ">
+          <h3 class="text-warning">
+            <i class="fas fa-history"></i> Our History
+          </h3>
+          <p class="mt-3">
+            Yassin Group was founded in 2010 with the goal of becoming a leader in the hookah glass industry. From the
+            very beginning, we focused on the finer details of design and manufacturing quality.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="testimonial py-5">
+
+  <div class="swiper-width">
+    <div class="header">
+      <h2>Here is what our customers have to say</h2>
+      <p>Hear from those who have experienced our quality firsthand</p>
+    </div>
+    <swiper-container slides-per-view="3" space-between="20" pagination="true" navigation="true" class="mySwiper">
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-3jpg.jpg" alt="Customer 1">
+          <i class="fas fa-quote-left"></i>
+          <h3>Magdi Abas</h3>
+          <p>I have been using the hookah glass from this company for several months, and I am truly satisfied with its
+            quality. The glass is durable, doesn’t easily warp with heat.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person-1.jpg" alt="Customer 2">
+          <i class="fas fa-quote-left"></i>
+          <h3>Ahmed Elsayed</h3>
+          <p>The customer service was excellent, and I received my order quickly. The product was exactly as expected.
+            The
+            glass is smooth and flawless, and I haven’t had any issues during use.</p>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="testimonial-card">
+          <img src="../../../assets/images/person2.jpg" alt="Customer 3">
+          <i class="fas fa-quote-left"></i>
+          <h3>Maged Ayman</h3>
+          <p>I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I
+            will
+            definitely continue purchasing your products.</p>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
 </section>

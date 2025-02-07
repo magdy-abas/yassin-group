@@ -146,27 +146,225 @@
     }
   }
 
-  h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    position: relative;
-    display: inline-block;
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background-color: var(--secondry-color);
-      border-radius: 2px;
-    }
-  }
-
   // Remove expansion panel body padding
   .mat-expansion-panel-body {
     padding: 0 !important;
     margin-top: -8px;
   }
+}
+.discover-section button.mat-accent {
+  color: white !important;
+
+  -mdc-outlined-button-label-text-color: #ffffff;
+  --mdc-outlined-button-outline-color: rgba(0, 0, 0, 0.12);
+  --mat-outlined-button-state-layer-color: #ffffff;
+  --mat-outlined-button-ripple-color: rgba(255, 255, 255, 0.1);
+}
+
+.discover-section button.mat-accent mat-icon {
+  color: white !important;
+}
+.about-us-section {
+  // Logo Box Styling
+  .logo-box {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #16495c; // Background color for the logo box
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+
+  .row {
+    &.align-items-stretch {
+      .text-box {
+        border: 1px solid #fff;
+      }
+      .col-md-6 {
+        .h-100 {
+          display: flex;
+          flex-direction: column;
+          justify-content: center; // Ensures content is vertically centered
+          background-color: #16495c;
+          border-radius: 0.5rem;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+          h2 {
+            font-size: 1.8rem; // Adjusted font size for better visibility
+            margin-bottom: 1rem;
+          }
+
+          p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-top: 1rem;
+            color: #ffffff; // Ensures text is readable on the background
+          }
+        }
+      }
+    }
+
+    // Styling for Equal Height Columns in the Second Row
+    .col-md-4 {
+      .h-100 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; // Centering content vertically
+        background: linear-gradient(
+            rgba(22, 73, 92, 0.5),
+            // Top overlay color
+            rgba(22, 73, 92, 0.5) // Bottom overlay color
+          ),
+          url("../../../assets/images/shape-smoke.png"); //
+        background-size: cover;
+        background-position: center;
+        border-radius: 0.5rem;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+        h3 {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+
+          i {
+            margin-right: 0.5rem;
+          }
+        }
+
+        p {
+          font-size: 1rem;
+          line-height: 1.6;
+          color: #ffffff; // Slightly lighter text color for better contrast
+        }
+      }
+    }
+  }
+}
+
+.swiper-width {
+  margin: auto;
+  width: 90%; /* Smaller carousel container */
+  background: linear-gradient(180deg, #16495c -123.5%, #1e293b 140.8%);
+  padding: 50px 0;
+}
+swiper-container {
+  height: 100%;
+  width: 80%; /* Smaller carousel container */
+}
+.testimonial {
+  margin-top: 40px;
+  padding-top: 40px; /* Add padding for image overlap */
+}
+
+.testimonial-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  top: -40px; /* Position image higher up */
+  left: 50%;
+  transform: translateX(-50%); /* Only center horizontally */
+
+  background-color: #1d3557;
+  z-index: 100;
+}
+
+.testimonial-card {
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
+  background: linear-gradient(180deg, #16495c 8.74%, #9498b8 190.61%);
+  border: 1px solid var(--slate-400, #94a3b8);
+
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+  position: relative;
+  height: 300px; /* Ensuring equal height for all cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  z-index: 0; /* Ensure the card stays below the image */
+
+  margin-top: 50px;
+}
+
+.testimonial-card i {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #f9a826;
+}
+
+.testimonial-card h3 {
+  margin: 10px 0 10px;
+  color: #f9a826;
+  font-size: 25px;
+}
+
+.testimonial-card p {
+  color: #c6d6f2;
+  font-size: 18px;
+  padding: 0 10px;
+}
+
+.swiper-pagination-bullet {
+  background-color: #f9a826;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: white;
+}
+
+.header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #f9a826;
+}
+
+.header p {
+  color: #c6d6f2;
+  margin: 10px 0 0;
+}
+/* Navigation buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  opacity: 1;
+  color: #f9a826;
+  width: 40px;
+  height: 40px;
+  margin: 50px;
+}
+
+/* Hide default arrows */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  display: none;
+}
+
+/* Pagination bullets */
+.swiper-pagination {
+  position: relative;
+  margin-top: px;
+}
+
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: #f9a826;
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
 }
