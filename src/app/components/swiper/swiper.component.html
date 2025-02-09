@@ -6,19 +6,12 @@
     </div>
 
     <div class="swiper-container">
-      <swiper-container
-        #swiper
-        slides-per-view="3"
-        space-between="20"
-        pagination="true"
-        loop="true"
-        breakpoints='{
-          "0": { "slidesPerView": 1, "spaceBetween": 10 },
-          "768": { "slidesPerView": 2, "spaceBetween": 15 },
-          "1024": { "slidesPerView": 3, "spaceBetween": 20 }
-        }'
-        class="mySwiper"
-      >
+      <swiper-container #swiper slides-per-view="3" space-between="20" pagination="false" loop="true" autoplay="true"
+        autoplay-delay="3000" autoplay-disable-on-interaction="false" breakpoints='{
+        "0": { "slidesPerView": 1, "spaceBetween": 10 },
+        "768": { "slidesPerView": 2, "spaceBetween": 15 },
+        "1024": { "slidesPerView": 3, "spaceBetween": 20 }
+      }' class="mySwiper">
         <swiper-slide *ngFor="let testimonial of testimonials">
           <div class="testimonial-card">
             <img [src]="testimonial.image" [alt]="testimonial.name">
@@ -31,16 +24,10 @@
 
       <!-- Custom Navigation Buttons -->
       <div class="custom-navigation">
-        <button
-          class="custom-prev-btn"
-          (click)="goToPrevSlide()"
-        >
+        <button class="custom-prev-btn" (click)="goToPrevSlide()">
           <i class="fas fa-chevron-left"></i>
         </button>
-        <button
-          class="custom-next-btn"
-          (click)="goToNextSlide()"
-        >
+        <button class="custom-next-btn" (click)="goToNextSlide()">
           <i class="fas fa-chevron-right"></i>
         </button>
       </div>

@@ -36,7 +36,7 @@ export class SwiperComponent implements AfterViewInit {
       name: 'Magdi Abas',
       quote:
         "I have been using the hookah glass from this company for several months, and I am truly satisfied with its quality. The glass is durable, doesn't easily warp with heat.",
-      image: '../../../assets/images/person-3.jpg',
+      image: '../../../assets/images/person2.jpg',
     },
     {
       name: 'Ahmed Elsayed',
@@ -48,9 +48,32 @@ export class SwiperComponent implements AfterViewInit {
       name: 'Maged Ayman',
       quote:
         'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
-      image: '../../../assets/images/person-2.jpg',
+      image: '../../../assets/images/person2.jpg',
     },
-    // Add more testimonials as needed
+    {
+      name: 'Maged Ayman',
+      quote:
+        'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
+      image: '../../../assets/images/person2.jpg',
+    },
+    {
+      name: 'Maged Ayman',
+      quote:
+        'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
+      image: '../../../assets/images/person2.jpg',
+    },
+    {
+      name: 'Maged Ayman',
+      quote:
+        'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
+      image: '../../../assets/images/person2.jpg',
+    },
+    {
+      name: 'Maged Ayman',
+      quote:
+        'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
+      image: '../../../assets/images/person2.jpg',
+    },
   ];
 
   ngAfterViewInit() {
