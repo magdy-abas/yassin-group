@@ -1,0 +1,49 @@
+<section class="testimonial py-5">
+  <div class="swiper-width">
+    <div class="header">
+      <h2>Here is what our customers have to say</h2>
+      <p>Hear from those who have experienced our quality firsthand</p>
+    </div>
+
+    <div class="swiper-container">
+      <swiper-container
+        #swiper
+        slides-per-view="3"
+        space-between="20"
+        pagination="true"
+        loop="true"
+        breakpoints='{
+          "0": { "slidesPerView": 1, "spaceBetween": 10 },
+          "768": { "slidesPerView": 2, "spaceBetween": 15 },
+          "1024": { "slidesPerView": 3, "spaceBetween": 20 }
+        }'
+        class="mySwiper"
+      >
+        <swiper-slide *ngFor="let testimonial of testimonials">
+          <div class="testimonial-card">
+            <img [src]="testimonial.image" [alt]="testimonial.name">
+            <i class="fas fa-quote-left"></i>
+            <h3>{{ testimonial.name }}</h3>
+            <p>{{ testimonial.quote }}</p>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+
+      <!-- Custom Navigation Buttons -->
+      <div class="custom-navigation">
+        <button
+          class="custom-prev-btn"
+          (click)="goToPrevSlide()"
+        >
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button
+          class="custom-next-btn"
+          (click)="goToNextSlide()"
+        >
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
