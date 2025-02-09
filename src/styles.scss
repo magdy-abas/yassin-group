@@ -101,33 +101,286 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-h2.main-title {
-  font-size: 2rem;
+.main-title {
+  font-size: 2.5rem;
   font-weight: 600;
   position: relative;
-  display: inline-block;
+  padding-bottom: 15px;
 
   &::after {
     content: "";
     position: absolute;
-    bottom: -8px;
+    bottom: 0;
     left: 0;
     width: 60px;
-    height: 3px;
-    background-color: var(--secondry-color);
-    border-radius: 2px;
+    height: 2px;
+    background-color: #d1962b;
   }
 }
 
-// :root {
-//   --swiper-pagination-color: red;
-//   --swiper-pagination-bullet-size: 8px;
-//   --swiper-pagination-bullet-width: 8px;
-//   --swiper-pagination-bullet-height: 8px;
-//   --swiper-pagination-bullet-inactive-color: #000;
-//   --swiper-pagination-bullet-inactive-opacity: 0.2;
-//   --swiper-pagination-bullet-opacity: 1;
-//   --swiper-pagination-bullet-horizontal-gap: 4px;
-//   --swiper-pagination-bullet-vertical-gap: 6px;
-//   --swiper-pagination-bottom: -1px !important;
-// }
+// Variables
+$primary-color: #d1962b;
+$white-color: #ffffff;
+$dark-bg: #0b1221;
+$input-bg: rgba(255, 255, 255, 0.1);
+
+.contact-section {
+  color: $white-color;
+
+  // Left side styling
+  .contact-info {
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 2rem;
+
+      .highlight {
+        color: $primary-color;
+      }
+    }
+
+    p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+  }
+
+  // Social links
+  .social-connect {
+    .social-links {
+      display: flex;
+      gap: 1rem;
+
+      .social-link {
+        color: $white-color;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &:hover {
+          color: $primary-color;
+        }
+
+        i {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  // Form styling
+  .contact-form {
+    label {
+      margin-bottom: 0.5rem;
+      color: $white-color;
+    }
+
+    .form-control {
+      background-color: transparent;
+      border: 1px solid $input-bg;
+      color: $white-color;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+
+      &::placeholder {
+        color: rgba($white-color, 0.5);
+      }
+
+      &:focus {
+        box-shadow: none;
+        border-color: $primary-color;
+        background-color: rgba($white-color, 0.05);
+      }
+    }
+
+    textarea.form-control {
+      resize: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: $primary-color;
+      color: $white-color;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 991.98px) {
+  .contact-section {
+    .contact-info {
+      margin-bottom: 3rem;
+    }
+
+    .social-connect {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .contact-section {
+    .contact-info {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.75rem;
+      }
+    }
+  }
+}
+
+// Variables
+$primary-color: #d1962b;
+$white-color: #ffffff;
+$dark-bg: #0b1221;
+
+.footer {
+  background-color: $dark-bg;
+  color: $white-color;
+
+  // Footer titles
+  .footer-title {
+    color: $white-color;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+
+  // Footer description
+  .footer-desc {
+    color: rgba($white-color, 0.7);
+    font-size: 0.9rem;
+  }
+
+  // Footer links
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      color: rgba($white-color, 0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+
+  // Email link
+  .footer-email {
+    color: rgba($white-color, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  // Social media links
+  .social-links {
+    display: flex;
+    gap: 1rem;
+
+    .social-link {
+      color: rgba($white-color, 0.7);
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+
+  // Newsletter section
+  .newsletter {
+    margin-top: 2rem;
+
+    .newsletter-title {
+      color: $primary-color;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .input-group {
+      max-width: 400px;
+
+      .form-control {
+        background-color: rgba($white-color, 0.1);
+        border: none;
+        padding: 0.8rem;
+        color: $white-color;
+
+        &::placeholder {
+          color: rgba($white-color, 0.5);
+        }
+
+        &:focus {
+          box-shadow: none;
+          background-color: rgba($white-color, 0.15);
+        }
+      }
+
+      .btn-subscribe {
+        background-color: $primary-color;
+        color: $white-color;
+        border: none;
+        padding: 0.8rem 1.5rem;
+
+        &:hover {
+          background-color: darken($primary-color, 10%);
+        }
+      }
+    }
+  }
+
+  // Copyright section
+  .copyright {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba($white-color, 0.1);
+    text-align: center;
+
+    p {
+      color: rgba($white-color, 0.7);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 991.98px) {
+  .footer {
+    .newsletter {
+      .input-group {
+        max-width: 100%;
+      }
+    }
+  }
+}
