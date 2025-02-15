@@ -1,0 +1,136 @@
+<div class="container mx-auto p-6">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Admin Dashboard</mat-card-title>
+    </mat-card-header>
+
+    <mat-tab-group>
+      <!-- Product List Tab -->
+      <mat-tab label="Product List">
+        <div class="p-4">
+          <!-- Loading Spinner -->
+          <div *ngIf="loading" class="flex justify-center items-center h-64">
+            <mat-spinner></mat-spinner>
+          </div>
+
+          <!-- Product Table -->
+          <div *ngIf="!loading && products.length > 0" class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="p-3 text-left">Name</th>
+                  <th class="p-3 text-left">Category</th>
+                  <th class="p-3 text-left">Price</th>
+                  <th class="p-3 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of products" class="border-b hover:bg-gray-50">
+                  <td class="p-3">{{ product.name }}</td>
+                  <td class="p-3">{{ product.category }}</td>
+                  <td class="p-3">
+                    {{ product.price | currency:'USD':'symbol':'1.2-2' }}
+                  </td>
+                  <td class="p-3 text-right">
+                    <button mat-icon-button color="warn" (click)="deleteProduct(product.id!)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- No Products Message -->
+          <div *ngIf="!loading && products.length === 0" class="text-center p-6 bg-gray-100 rounded">
+            No products found
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- Add Product Tab -->
+      <mat-tab label="Add Product">
+        <div class="p-4">
+          <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+            <!-- Basic Product Information -->
+            <div class="grid md:grid-cols-2 gap-4">
+              <mat-form-field>
+                <mat-label>Product Name</mat-label>
+                <input matInput formControlName="name" placeholder="Enter product name" required>
+                <mat-error *ngIf="f['name'].invalid && f['name'].touched">
+                  Product name is required and must be at least 3 characters
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category" required>
+                  <mat-option *ngFor="let cat of categories" [value]="cat">
+                    {{ cat | titlecase }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="f['category'].invalid && f['category'].touched">
+                  Category is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Description -->
+            <mat-form-field class="w-full">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="description" placeholder="Enter product description" rows="3"
+                required></textarea>
+              <mat-error *ngIf="f['description'].invalid && f['description'].touched">
+                Description is required and must be at least 10 characters
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Product Details -->
+            <div class="grid md:grid-cols-3 gap-4">
+              <mat-form-field>
+                <mat-label>Height</mat-label>
+                <input matInput formControlName="height" placeholder="Enter product height" required>
+                <mat-error *ngIf="f['height'].invalid && f['height'].touched">
+                  Height is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Type</mat-label>
+                <input matInput formControlName="type" placeholder="Enter product type" required>
+                <mat-error *ngIf="f['type'].invalid && f['type'].touched">
+                  Type is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Price (Optional)</mat-label>
+                <input matInput type="number" formControlName="price" placeholder="Enter product price">
+              </mat-form-field>
+            </div>
+
+            <!-- Image Uploads -->
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block mb-2">Main Image</label>
+                <input type="file" (change)="onMainImageSelected($event)" accept="image/*"
+                  class="w-full px-3 py-2 border rounded-md">
+              </div>
+
+              <div>
+                <label class="block mb-2">Additional Images</label>
+                <input type="file" (change)="onAdditionalImagesSelected($event)" accept="image/*" multiple
+                  class="w-full px-3 py-2 border rounded-md">
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button mat-raised-button color="primary" type="submit" class="w-full" [disabled]="productForm.invalid">
+              Add Product
+            </button>
+          </form>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

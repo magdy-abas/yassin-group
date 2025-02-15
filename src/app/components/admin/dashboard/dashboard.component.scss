@@ -1,0 +1,46 @@
+// Dashboard Component Styles
+:host {
+  display: block;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+// Table Styling
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  tr:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+// Form Styling
+.mat-form-field {
+  width: 100%;
+}
+
+// Responsive Adjustments
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+}
+
+// Tab Styling
+.mat-tab-group {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
