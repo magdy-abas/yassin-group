@@ -1,79 +1,50 @@
 <app-navbar></app-navbar>
+<app-hero-section></app-hero-section>
+<section class="discover-section py-5">
+  <div class="container">
+    <h2 class="text-white main-title mb-4">Discover</h2>
 
-<div class="container mx-auto px-4 py-8">
-  <app-hero-section></app-hero-section>
+    <!-- Loading state -->
+    <div *ngIf="loading" class="text-center py-5">
+      <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="text-white mt-3">Loading products...</p>
+    </div>
 
-  <!-- Loading state -->
-  <div *ngIf="loading" class="text-center py-8">
-    Loading products...
-  </div>
+    <!-- Error state -->
+    <div *ngIf="error" class="alert alert-danger text-center" role="alert">
+      {{ error }}
+    </div>
 
-  <!-- Error state -->
-  <div *ngIf="error" class="text-red-500 text-center py-8">
-    {{ error }}
-  </div>
+    <!-- Products grid -->
+    <div *ngIf="!loading && !error" class="row g-4">
+      <div *ngFor="let product of products" class="col-12 col-md-6 col-lg-3" routerLink="/product/{{ product.id }}">
+        <div class="product-card" [class.featured]="product.featured">
+          <img src="assets/images/product-bg.png" class="bg-shape-img" alt="bg-img-shape">
 
-  <!-- Products grid -->
-  <div *ngIf="!loading && !error" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-    <mat-card *ngFor="let product of products" class="max-w-sm">
-      <mat-card-header>
-        <mat-card-title>{{ product.name }}</mat-card-title>
-        <mat-card-subtitle>{{ product.category | titlecase }}</mat-card-subtitle>
-      </mat-card-header>
-
-      <!-- Main Product Image -->
-      <img *ngIf="product.mainImg" mat-card-image [src]="product.mainImg" [alt]="product.name">
-
-      <mat-card-content>
-        <p class="mt-2">{{ product.description }}</p>
-
-        <!-- Product Specifications -->
-        <div class="mt-4 space-y-2">
-          <p><strong>Height:</strong> {{ product.height }}</p>
-          <p><strong>Type:</strong> {{ product.type }}</p>
-        </div>
-
-        <!-- Additional Details -->
-        <mat-expansion-panel class="mt-4">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Additional Details
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-
-          <div class="grid grid-cols-2 gap-2">
-            <p *ngIf="product.details?.brand"><strong>Brand:</strong> {{ product.details?.brand }}</p>
-            <p *ngIf="product.details?.color"><strong>Color:</strong> {{ product.details?.color }}</p>
-            <p *ngIf="product.details?.material"><strong>Material:</strong> {{ product.details?.material }}</p>
+          <div class="product-image">
+            <img [src]="product.mainImg" [alt]="product.name" class="img-fluid">
           </div>
 
-          <!-- Additional Images Gallery -->
-          <div *ngIf="product.images.length > 1" class="mt-4">
-            <h4 class="font-semibold mb-2">Product Gallery</h4>
-            <div class="grid grid-cols-3 gap-2">
-              <img *ngFor="let img of product.images.slice(1)" [src]="img" [alt]="product.name"
-                class="w-full h-24 object-cover rounded">
+          <div class="product-info">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5>{{ product.name }}</h5>
+              <button class="btn toggle-info-btn">
+                Details
+              </button>
             </div>
+            <p class="product-description">{{ product.description }}</p>
           </div>
+        </div>
+      </div>
+    </div>
 
-        </mat-expansion-panel>
-
-        <!-- Price -->
-        <p *ngIf="product.price" class="text-xl font-bold mt-4">
-          {{ product.price | currency:'USD':'symbol':'1.2-2' }}
-        </p>
-      </mat-card-content>
-
-      <mat-card-actions>
-        <button mat-button color="primary">
-          <mat-icon>shopping_cart</mat-icon>
-          Add to Cart
-        </button>
-        <button mat-button color="accent">
-          <mat-icon>favorite</mat-icon>
-          Favorite
-        </button>
-      </mat-card-actions>
-    </mat-card>
+    <div class="text-center mt-5">
+      <button class="btn view-more-btn">
+        View More
+        <i class="bi bi-chevron-down ms-2"></i>
+      </button>
+    </div>
   </div>
-</div>
+</section>

@@ -22,6 +22,7 @@ import { Product } from './../../../Dtos/productDto';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    RouterLink,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',

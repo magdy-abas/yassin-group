@@ -1,1 +1,70 @@
-<p>product-details works!</p>
+<!-- product-details.component.html -->
+<div class="product-details-container" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="product-details-container" *ngIf="error">
+  <mat-card>
+    <mat-card-content>
+      <p class="error-message">{{ error }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="product-details-container" *ngIf="product">
+  <div class="product-image-gallery">
+    <!-- Main image with navigation -->
+    <div class="image-container">
+      <button mat-icon-button class="nav-button prev" (click)="prevImage()"
+        *ngIf="product.images && product.images.length > 1">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+
+      <img [src]="product.images[currentImageIndex] || product.mainImg" [alt]="product.name" class="product-main-image">
+
+      <button mat-icon-button class="nav-button next" (click)="nextImage()"
+        *ngIf="product.images && product.images.length > 1">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+    <!-- Thumbnail navigation (if multiple images) -->
+    <div class="image-thumbnails" *ngIf="product.images && product.images.length > 1">
+      <img *ngFor="let image of product.images; let i = index" [src]="image" [alt]="'Thumbnail ' + (i + 1)"
+        (click)="currentImageIndex = i" [class.active]="currentImageIndex === i">
+    </div>
+  </div>
+
+  <div class="product-info">
+    <h1>{{ product.name }}</h1>
+
+    <div class="product-meta">
+      <span class="category">{{ product.category }}</span>
+      <span class="price" *ngIf="product.price">{{ product.price | currency }}</span>
+    </div>
+
+    <p class="description">{{ product.description }}</p>
+
+    <div class="product-details" *ngIf="product.details">
+
+      <ul>
+        <li *ngIf="product.details.brand"><strong>Brand:</strong> {{ product.details.brand }}</li>
+        <li *ngIf="product.details.color"><strong>Color:</strong> {{ product.details.color }}</li>
+        <li *ngIf="product.details.material"><strong>Material:</strong> {{ product.details.material }}</li>
+      </ul>
+    </div>
+
+    <div class="additional-specs">
+
+      <ul>
+        <li *ngIf="product.height"><strong>Height:</strong> {{ product.height }}</li>
+        <li *ngIf="product.type"><strong>Type:</strong> {{ product.type }}</li>
+      </ul>
+    </div>
+
+    <div class="actions">
+      <button mat-raised-button color="primary">Add to Cart</button>
+      <button mat-raised-button color="accent">Buy Now</button>
+    </div>
+  </div>
+</div>
