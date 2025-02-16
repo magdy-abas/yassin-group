@@ -11,7 +11,11 @@ import {
   query,
   orderByChild,
   equalTo,
+  limitToFirst,
+  orderByKey,
+  startAfter,
 } from '@angular/fire/database';
+
 import {
   Storage,
   ref,
@@ -153,6 +157,49 @@ export class FirebaseService {
       return null;
     } catch (error) {
       console.error('Error getting product by ID:', error);
+      throw error;
+    }
+  }
+
+  async getProductsPaginated(
+    pageSize: number = 8,
+    lastKey: string | null = null
+  ): Promise<{ products: Product[]; lastKey: string | null }> {
+    try {
+      let productsQuery;
+      if (lastKey) {
+        productsQuery = query(
+          dbRef(this.database, 'products'),
+          orderByKey(),
+          startAfter(lastKey),
+          limitToFirst(pageSize)
+        );
+      } else {
+        productsQuery = query(
+          dbRef(this.database, 'products'),
+          orderByKey(),
+          limitToFirst(pageSize)
+        );
+      }
+
+      const snapshot = await get(productsQuery);
+      const products: Product[] = [];
+      let newLastKey: string | null = null;
+
+      snapshot.forEach((childSnapshot) => {
+        products.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val(),
+        } as Product);
+        newLastKey = childSnapshot.key;
+      });
+
+      return {
+        products,
+        lastKey: newLastKey,
+      };
+    } catch (error) {
+      console.error('Error getting paginated products:', error);
       throw error;
     }
   }

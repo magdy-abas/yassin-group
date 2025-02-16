@@ -1,49 +1,42 @@
 /* product-details.component.scss */
-.product-details-container {
+:host {
   display: flex;
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 1rem;
-  gap: 2rem;
-  color: #ffff;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
+.product-details-container {
+  color: #ffff;
 }
 
 .product-image-gallery {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   .image-container {
     position: relative;
     width: 100%;
-    max-height: 500px;
+    height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 
     .nav-button {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       z-index: 10;
+      background-color: rgba(14, 14, 13, 0.8);
 
       &.prev {
-        left: 10px;
+        left: 50px;
       }
       &.next {
-        right: 10px;
+        right: 50px;
       }
     }
 
     .product-main-image {
       max-width: 100%;
-      max-height: 500px;
+      max-height: 400px;
       object-fit: contain;
     }
   }
@@ -51,6 +44,7 @@
   .image-thumbnails {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 1rem;
 
@@ -72,8 +66,6 @@
 }
 
 .product-info {
-  flex: 1;
-
   h1 {
     margin-bottom: 0.5rem;
     font-size: 2rem;
@@ -87,7 +79,7 @@
 
     .category {
       text-transform: capitalize;
-      background-color: #ffff;
+      background-color: #d1962b;
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
     }
@@ -102,21 +94,19 @@
   .description {
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    overflow-wrap: break-word;
+    min-height: 100px;
+    align-content: center;
   }
 
   .product-details,
   .additional-specs {
     margin-bottom: 1.5rem;
 
-    h2 {
-      border-bottom: 1px solid #e0e0e0;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
     ul {
       list-style-type: none;
       padding: 0;
+      margin: 0;
 
       li {
         margin-bottom: 0.5rem;
@@ -134,8 +124,41 @@
   }
 }
 
-// Error and loading states
 .error-message {
   color: red;
   text-align: center;
+}
+
+.ylw-clr {
+  color: #d1962b;
+}
+
+.mat-primary-btn {
+  background-color: #d1962b !important;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .product-image-gallery {
+    .image-container {
+      height: 300px;
+
+      .product-main-image {
+        max-height: 300px;
+      }
+    }
+  }
+  .product-info .description {
+    min-height: 20px !important;
+  }
+}
+.container-fluid {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+  background-color: #000;
+  color: #fff;
+  margin-top: auto;
 }

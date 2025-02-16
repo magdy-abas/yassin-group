@@ -8,6 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-product-details',
@@ -18,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
+    NavbarComponent,
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
@@ -56,19 +58,24 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  // Method to navigate through product images
+  displayImages(): string[] {
+    return this.product?.images && this.product.images.length > 0
+      ? this.product.images
+      : ([this.product?.mainImg].filter(Boolean) as string[]);
+  }
+
   nextImage() {
-    if (this.product && this.product.images) {
-      this.currentImageIndex =
-        (this.currentImageIndex + 1) % this.product.images.length;
+    const images = this.displayImages();
+    if (images.length > 1) {
+      this.currentImageIndex = (this.currentImageIndex + 1) % images.length;
     }
   }
 
   prevImage() {
-    if (this.product && this.product.images) {
+    const images = this.displayImages();
+    if (images.length > 1) {
       this.currentImageIndex =
-        (this.currentImageIndex - 1 + this.product.images.length) %
-        this.product.images.length;
+        (this.currentImageIndex - 1 + images.length) % images.length;
     }
   }
 }

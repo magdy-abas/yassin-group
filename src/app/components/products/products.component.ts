@@ -1,63 +1,105 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { HeroSectionComponent } from '../hero-section/hero-section.component';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { RouterLink } from '@angular/router';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { Database, ref, get, child } from '@angular/fire/database';
-import { Product } from './../../../Dtos/productDto';
+import { FirebaseService } from '../../services/firebase.service';
+import { Product } from '../../../Dtos/productDto';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [
-    CommonModule,
-    HeroSectionComponent,
-    NavbarComponent,
-    RouterLink,
-    MatExpansionModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    RouterLink,
-  ],
+  imports: [CommonModule, HeroSectionComponent, NavbarComponent, RouterLink],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit {
-  private database: Database = inject(Database);
   products: Product[] = [];
   loading = true;
   error = '';
+  lastKey: string | null = null;
+  allProductsLoaded = false;
+  isLoadingMore = false; // New flag to differentiate initial and subsequent loading
+
+  constructor(
+    private firebaseService: FirebaseService,
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit() {
-    this.getProducts();
+    this.loadInitialProducts();
+    this.setupInfiniteScroll();
   }
 
-  async getProducts() {
+  setupInfiniteScroll() {
+    this.ngZone.runOutsideAngular(() => {
+      window.addEventListener('scroll', this.onWindowScroll.bind(this));
+    });
+  }
+
+  onWindowScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 200
+    ) {
+      this.ngZone.run(() => {
+        this.loadMoreProducts();
+      });
+    }
+  };
+
+  async loadInitialProducts() {
     try {
-      console.log('Starting to fetch products...');
-      const dbRef = ref(this.database);
-      const snapshot = await get(child(dbRef, 'products'));
+      this.loading = true;
+      const result = await this.firebaseService.getProductsPaginated();
+      this.products = result.products;
+      this.lastKey = result.lastKey;
 
-      if (snapshot.exists()) {
-        this.products = Object.entries(snapshot.val()).map(([id, data]) => ({
-          id,
-          ...(data as any),
-        }));
-      } else {
-        this.products = [];
-      }
+      // Determine if all products are loaded
+      this.allProductsLoaded = result.products.length < 8;
 
-      console.log('Final processed products:', this.products);
       this.loading = false;
     } catch (error: any) {
-      console.error('Error loading products:', error);
+      console.error('Error loading initial products:', error);
       this.error = error.message;
       this.loading = false;
     }
+  }
+
+  async loadMoreProducts() {
+    // Prevent multiple simultaneous loading attempts
+    if (this.loading || this.isLoadingMore || this.allProductsLoaded) return;
+
+    try {
+      this.isLoadingMore = true;
+      const result = await this.firebaseService.getProductsPaginated(
+        8,
+        this.lastKey
+      );
+
+      if (result.products.length === 0) {
+        this.allProductsLoaded = true;
+        this.isLoadingMore = false;
+        return;
+      }
+
+      this.products = [...this.products, ...result.products];
+      this.lastKey = result.lastKey;
+
+      // Check if this is the last batch of products
+      if (result.products.length < 8) {
+        this.allProductsLoaded = true;
+      }
+
+      this.isLoadingMore = false;
+    } catch (error: any) {
+      console.error('Error loading more products:', error);
+      this.error = error.message;
+      this.isLoadingMore = false;
+    }
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.onWindowScroll);
   }
 }

@@ -2,10 +2,10 @@
 <app-hero-section></app-hero-section>
 <section class="discover-section py-5">
   <div class="container">
-    <h2 class="text-white main-title mb-4">Discover</h2>
+    <h2 class="text-white main-title mb-4">Products</h2>
 
-    <!-- Loading state -->
-    <div *ngIf="loading" class="text-center py-5">
+    <!-- Loading state for initial load -->
+    <div *ngIf="loading && products.length === 0" class="text-center py-5">
       <div class="spinner-border text-light" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -18,7 +18,7 @@
     </div>
 
     <!-- Products grid -->
-    <div *ngIf="!loading && !error" class="row g-4">
+    <div *ngIf="!error" class="row g-4">
       <div *ngFor="let product of products" class="col-12 col-md-6 col-lg-3" routerLink="/product/{{ product.id }}">
         <div class="product-card" [class.featured]="product.featured">
           <img src="assets/images/product-bg.png" class="bg-shape-img" alt="bg-img-shape">
@@ -40,11 +40,23 @@
       </div>
     </div>
 
-    <div class="text-center mt-5">
-      <button class="btn view-more-btn">
-        View More
-        <i class="bi bi-chevron-down ms-2"></i>
-      </button>
+    <!-- Loading spinner for more products -->
+    <div *ngIf="isLoadingMore" class="text-center mt-4">
+      <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Loading more products...</span>
+      </div>
+    </div>
+
+    <!-- No more products message -->
+    <div *ngIf="allProductsLoaded && products.length > 0" class="text-center mt-4 text-white">
+      No more products to load
     </div>
   </div>
 </section>
+
+<div class="footer ">
+  <div class="copyright " style="padding-bottom: 13px;  margin-top:13px ;">
+    <p>© 2024 Yassin Group Hookah. All rights reserved.</p>
+  </div>
+
+</div>

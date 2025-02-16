@@ -1,6 +1,5 @@
 .discover-section {
   background-color: var(--slate-900);
-  min-height: 100vh;
 
   mat-card.product-card {
     background: linear-gradient(180deg, #396474 35.42%, #1e293b 145.48%);
@@ -296,7 +295,11 @@
     }
   }
 }
-
+.contact-section .contact-info {
+  background-color: rgba(22, 73, 92, 0.7);
+  border-radius: 20px;
+  align-content: center;
+}
 // Responsive adjustments
 @media (max-width: 991.98px) {
   .our-service {
