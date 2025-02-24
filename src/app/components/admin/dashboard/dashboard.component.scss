@@ -1,0 +1,59 @@
+/* Custom styles for h3 headers in dashboard */
+
+h3.h5.fw-semibold {
+  position: relative;
+  padding-right: 15px;
+  margin-bottom: 20px;
+  font-family: "Cairo", sans-serif;
+  font-weight: 600;
+  color: #3f51b5;
+  border-right: 4px solid #3f51b5;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* Add a subtle background to section headers */
+.form-section {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-right: 4px solid #3f51b5;
+}
+
+.form-section h3 {
+  margin-top: 0;
+  border-right: none;
+  color: #3f51b5;
+  font-size: 18px;
+}
+
+/* Add slight style variation for different sections */
+.form-section:nth-child(odd) {
+  border-right-color: #3f51b5;
+}
+
+.form-section:nth-child(even) {
+  border-right-color: #ff4081;
+}
+
+.form-section:nth-child(even) h3 {
+  color: #ff4081;
+}
+
+/* Add subtle animation on hover */
+h3.h5.fw-semibold:hover {
+  transform: translateX(-3px);
+  transition: transform 0.3s ease;
+}
+
+/* Enhanced tabs for better visibility */
+.mat-mdc-tab {
+  font-weight: 500;
+  min-width: 160px;
+  font-family: "Cairo", sans-serif;
+}
+
+.mat-mdc-tab.mdc-tab--active {
+  font-weight: 700;
+}

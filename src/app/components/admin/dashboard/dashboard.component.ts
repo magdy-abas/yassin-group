@@ -48,6 +48,7 @@ import {
   CreateProductDto,
   UpdateProductDto,
 } from './../../../../Dtos/productDto';
+import { AuthService } from '../../../services/auth.service';
 
 interface ProductFormData {
   name: string;
@@ -117,8 +118,11 @@ export class DashboardComponent implements OnInit {
   existingImages: string[] = [];
   categories: Array<'hookah-glass' | 'hookah'> = ['hookah-glass', 'hookah'];
 
-  constructor() {
+  constructor(private authService: AuthService) {
     this.initializeForm();
+  }
+  logout(): void {
+    this.authService.logout();
   }
 
   private initializeForm(product?: Product) {
