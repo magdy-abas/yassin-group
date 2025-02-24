@@ -34,8 +34,8 @@
               <tbody>
                 <tr *ngFor="let product of products" class="border-b hover:bg-gray-50">
                   <td class="p-3">
-                    <div>{{ product.translations?.en?.name }}</div>
-                    <div class="text-sm text-gray-600 mt-1">{{ product.translations?.ar?.name }}</div>
+                    <div>{{ product.translations.en.name }}</div>
+                    <div class="text-sm text-gray-600 mt-1">{{ product.translations.ar.name }}</div>
                   </td>
                   <td class="p-3">{{ product.category }}</td>
                   <td class="p-3">

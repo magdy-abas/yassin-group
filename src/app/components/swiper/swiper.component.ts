@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { register } from 'swiper/element/bundle';
 import { Swiper } from 'swiper/types';
 import { TranslationService } from '../../services/translation.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 // Register Swiper web components
 register();
@@ -24,7 +25,7 @@ interface Testimonial {
 @Component({
   selector: 'app-swiper',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './swiper.component.html',
   styleUrl: './swiper.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -46,24 +47,6 @@ export class SwiperComponent implements AfterViewInit {
       quote:
         "The customer service was excellent, and I received my order quickly. The product was exactly as expected. The glass is smooth and flawless, and I haven't had any issues during use.",
       image: '../../../assets/images/person-1.jpg',
-    },
-    {
-      name: 'Maged Ayman',
-      quote:
-        'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
-      image: '../../../assets/images/person2.jpg',
-    },
-    {
-      name: 'Maged Ayman',
-      quote:
-        'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
-      image: '../../../assets/images/person2.jpg',
-    },
-    {
-      name: 'Maged Ayman',
-      quote:
-        'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
-      image: '../../../assets/images/person2.jpg',
     },
     {
       name: 'Maged Ayman',

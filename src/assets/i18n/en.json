@@ -116,5 +116,9 @@
     "CUSTOMER3": {
       "FEEDBACK": "I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste."
     }
+  },
+  "testimonial": {
+    "h2": "Here is what our customers have to say",
+    "p": "Hear from those who have experienced our quality firsthand"
   }
 }

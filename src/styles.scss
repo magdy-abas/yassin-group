@@ -259,18 +259,17 @@
   }
 }
 
-// Add this for smooth transitions
 body {
   transition: all 0.3s ease;
 }
 body {
-  // font-family: "Cairo", serif;
   font-family: "Poppins", serif;
   background-color: #0f172a;
   transition: all 0.3s ease;
 }
 .hero-section .main-title {
   margin: 0;
+  padding: 0;
   line-height: 0 !important;
 }
 .hero-section .main-title::after {
