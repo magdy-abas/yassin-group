@@ -1,28 +1,58 @@
-<nav class="navbar cst-navbar navbar-expand-lg ">
+<!-- navbar.component.html -->
+<nav class="navbar cst-navbar navbar-expand-lg" [class.rtl]="currentLang === 'ar'">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../../../assets/images/logo.png" alt="logo" class="img-fluid"></a>
+    <a class="navbar-brand" href="#">
+      <img src="../../../assets/images/logo.png" alt="logo" class="img-fluid">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto  mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/home">Home</a>
+          <a class="nav-link active" routerLink="/home">
+            {{ 'NAV.HOME' | translate }}
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" routerLink="/products">Products</a>
+          <a class="nav-link" routerLink="/products">
+            {{ 'NAV.PRODUCTS' | translate }}
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Service</a>
+          <a class="nav-link" href="#">
+            {{ 'NAV.SERVICE' | translate }}
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link" href="#">
+            {{ 'NAV.CONTACT' | translate }}
+          </a>
         </li>
 
-
+        <!-- Language Dropdown -->
+        <li class="nav-item dropdown">
+          <a class=" dropdown-toggle btn btn-danger" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            {{ currentLang === 'en' ? 'language' : 'اللغة' }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" href="#" (click)="switchLang('en'); $event.preventDefault()"
+                [class.active]="currentLang === 'en'">
+                English
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" (click)="switchLang('ar'); $event.preventDefault()"
+                [class.active]="currentLang === 'ar'">
+                عربي
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
-
     </div>
   </div>
 </nav>

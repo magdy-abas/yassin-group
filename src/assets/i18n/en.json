@@ -1,0 +1,111 @@
+{
+  "NAV": {
+    "HOME": "Home",
+    "PRODUCTS": "Products",
+    "SERVICE": "Service",
+    "CONTACT": "Contact Us"
+  },
+  "DISCOVER": {
+    "TITLE": "Discover",
+    "DETAILS": "Details"
+  },
+  "ABOUT": {
+    "TITLE": "About Us",
+    "ABOUT_GROUP": {
+      "TITLE": "About Yassin Group",
+      "DESCRIPTION": "Leading company specialized in the manufacturing of hookah glass. Established to meet both local and global market demands in the hookah industry, we offer high-quality products featuring modern technology and innovative designs that cater to a variety of tastes."
+    },
+    "VISION": {
+      "TITLE": "Our Vision",
+      "DESCRIPTION": "We aim to be the world leader in the hookah glass manufacturing industry, focusing on innovation and quality in every aspect of our work."
+    },
+    "MISSION": {
+      "TITLE": "Our Mission",
+      "DESCRIPTION": "We strive to be the ideal partner for our customers in the hookah industry, using the latest technologies and high-quality materials to ensure product durability and performance."
+    },
+    "HISTORY": {
+      "TITLE": "Our History",
+      "DESCRIPTION": "Yassin Group was founded in 2010 with the goal of becoming a leader in the hookah glass industry. From the very beginning, we focused on the finer details of design and manufacturing quality."
+    }
+  },
+  "SERVICES": {
+    "TITLE": "Our Service",
+    "CUSTOM_DESIGN": {
+      "TITLE": "Custom Design Based on Customer Preferences",
+      "DESCRIPTION": "We offer custom hookah glass designs in a variety of shapes, and we can create any specific design based on your requirements and preferences."
+    },
+    "DELIVERY": {
+      "TITLE": "Delivery and Tracking",
+      "DESCRIPTION": "We are capable of delivering orders to any location, providing shipment tracking services to ensure that your products arrive safely and on time."
+    },
+    "BUDGET": {
+      "TITLE": "Designs to Fit Your Budget",
+      "DESCRIPTION": "We offer a range of designs to fit various budgets while ensuring the quality of materials used in the production."
+    },
+    "PREMIUM": {
+      "TITLE": "Premium Materials and Timely Delivery",
+      "DESCRIPTION": "We use the finest materials in manufacturing hookah glass and are committed to delivering within a short time frame."
+    }
+  },
+  "CONTACT": {
+    "TITLE": "Contact us",
+    "NEED_HELP": "Need Help?",
+    "GET_IN_TOUCH": "Get in Touch with us",
+    "DESCRIPTION": "We are here to help! If you have any questions or inquiries about our products or services, don't hesitate to reach out. We are always ready to provide you with the best shopping experience.",
+    "CONNECT": "Connect with us:",
+    "FORM": {
+      "FULL_NAME": "Full Name",
+      "FULL_NAME_PLACEHOLDER": "Enter your name",
+      "EMAIL": "Email",
+      "EMAIL_PLACEHOLDER": "Enter your email address",
+      "PHONE": "Phone",
+      "PHONE_PLACEHOLDER": "Enter your phone number",
+      "MESSAGE": "Message",
+      "MESSAGE_PLACEHOLDER": "Type your Message",
+      "SUBMIT": "Submit"
+    }
+  },
+  "FOOTER": {
+    "COMPANY_NAME": "Yassin Group Hookah",
+    "COMPANY_DESC": "Specialized in the manufacturing of hookah glass",
+    "ABOUT_US": "About us",
+    "CONTACT_US": "Contact us",
+    "SERVICES": "Services",
+    "EMAIL_US": "Email us at",
+    "FOLLOW_US": "Follow us",
+    "NEWSLETTER": {
+      "TITLE": "Get Updated with us",
+      "PLACEHOLDER": "Get newsletter"
+    },
+    "COPYRIGHT": "© 2024 Yassin Group Hookah. All rights reserved."
+  },
+  "PRODUCTS": {
+    "HOOKAH1": {
+      "TITLE": "Blue Hookah with silver",
+      "DESCRIPTION": "The Best Hookah at Unbeatable Prices with some gold touches"
+    },
+    "HOOKAH2": {
+      "TITLE": "Red Hookah with gold",
+      "DESCRIPTION": "An elegant Hookah with a premium design"
+    },
+    "HOOKAH3": {
+      "TITLE": "Classic Black Hookah",
+      "DESCRIPTION": "A traditional style with modern craftsmanship"
+    },
+    "HOOKAH4": {
+      "TITLE": "Glass Hookah ",
+      "DESCRIPTION": "A stylish and innovative hookah with LED lights"
+    }
+  },
+  "TESTIMONIALS": {
+    "CUSTOMER1": {
+      "FEEDBACK": "I have been using the hookah glass from this company for several months, and I am truly satisfied with its quality."
+    },
+    "CUSTOMER2": {
+      "FEEDBACK": "The customer service was excellent, and I received my order quickly."
+    },
+    "CUSTOMER3": {
+      "FEEDBACK": "I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste."
+    }
+  }
+}

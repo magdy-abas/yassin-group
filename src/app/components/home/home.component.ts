@@ -7,6 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { SwiperComponent } from '../swiper/swiper.component';
+import { TranslationService } from '../../services/translation.service';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 interface HookahProduct {
   id: number;
@@ -15,10 +17,12 @@ interface HookahProduct {
   imageUrl: string;
   featured?: boolean;
 }
+
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
+    TranslateModule,
     CommonModule,
     NavbarComponent,
     HeroSectionComponent,
@@ -33,59 +37,88 @@ interface HookahProduct {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeComponent {
-  products: HookahProduct[] = [
-    {
-      id: 1,
-      title: 'Blue Hookah with silver',
-      description:
-        'The Best Hookah at Unbeatable Prices with some gold touches',
-      imageUrl: 'assets/images/pngwing-com-3-116.png',
-      featured: true,
-    },
-    {
-      id: 2,
-      title: 'Blue Hookah with silver',
-      description:
-        'The Best Hookah at Unbeatable Prices with some gold touches',
-      imageUrl: 'assets/images/pngwing-com-3-116.png',
-      featured: true,
-    },
-    {
-      id: 3,
-      title: 'Blue Hookah with silver',
-      description:
-        'The Best Hookah at Unbeatable Prices with some gold touches',
-      imageUrl: 'assets/images/pngwing-com-3-116.png',
-      featured: true,
-    },
-    {
-      id: 4,
-      title: 'Blue Hookah with silver',
-      description:
-        'The Best Hookah at Unbeatable Prices with some gold touches',
-      imageUrl: 'assets/images/pngwing-com-3-116.png',
-      featured: true,
-    },
-  ];
-  testimonials = [
-    {
-      name: 'Magdi Abas',
-      image: 'assets/images/customer1.jpg',
-      feedback:
-        "I have been using the hookah glass from this company for several months, and I am truly satisfied with its quality. The glass is durable, doesn't easily warp with heat.",
-    },
-    {
-      name: 'Ahmed Elsayed',
-      image: 'assets/images/customer2.jpg',
-      feedback:
-        'The customer service was excellent, and I received my order quickly. The product was exactly as expected. The glass is smooth and flawless, and I haven’t had any issues during use.',
-    },
-    {
-      name: 'Maged Ayman',
-      image: 'assets/images/customer3.jpg',
-      feedback:
-        'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
-    },
-  ];
+  currentLang: string = 'en';
+  products: HookahProduct[] = [];
+  testimonials: any[] = [];
   expandedIndex = -1;
+
+  constructor(
+    private translationService: TranslationService,
+    private translate: TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
+
+    // Load translations initially
+    this.loadTranslations();
+
+    // Listen for language changes and update dynamically
+    this.translate.onLangChange.subscribe(() => {
+      this.loadTranslations();
+    });
+
+    this.translationService.currentLanguage$.subscribe((lang) => {
+      this.currentLang = lang;
+      this.translate.use(lang);
+    });
+  }
+
+  private loadTranslations() {
+    this.translate
+      .get(['PRODUCTS', 'TESTIMONIALS'])
+      .subscribe((translations) => {
+        this.products = [
+          {
+            id: 1,
+            title: translations.PRODUCTS.HOOKAH1.TITLE,
+            description: translations.PRODUCTS.HOOKAH1.DESCRIPTION,
+            imageUrl: 'assets/images/pngwing-com-3-116.png',
+            featured: true,
+          },
+          {
+            id: 2,
+            title: translations.PRODUCTS.HOOKAH2.TITLE,
+            description: translations.PRODUCTS.HOOKAH2.DESCRIPTION,
+            imageUrl: 'assets/images/pngwing-com-3-116.png',
+            featured: true,
+          },
+          {
+            id: 3,
+            title: translations.PRODUCTS.HOOKAH3.TITLE,
+            description: translations.PRODUCTS.HOOKAH3.DESCRIPTION,
+            imageUrl: 'assets/images/pngwing-com-3-116.png',
+            featured: true,
+          },
+          {
+            id: 4,
+            title: translations.PRODUCTS.HOOKAH4.TITLE,
+            description: translations.PRODUCTS.HOOKAH4.DESCRIPTION,
+            imageUrl: 'assets/images/pngwing-com-3-116.png',
+            featured: true,
+          },
+        ];
+
+        this.testimonials = [
+          {
+            name: 'Magdi Abas',
+            image: 'assets/images/customer1.jpg',
+            feedback: translations.TESTIMONIALS.CUSTOMER1.FEEDBACK,
+          },
+          {
+            name: 'Ahmed Elsayed',
+            image: 'assets/images/customer2.jpg',
+            feedback: translations.TESTIMONIALS.CUSTOMER2.FEEDBACK,
+          },
+          {
+            name: 'Maged Ayman',
+            image: 'assets/images/customer3.jpg',
+            feedback: translations.TESTIMONIALS.CUSTOMER3.FEEDBACK,
+          },
+        ];
+      });
+  }
+
+  switchLanguage(lang: string) {
+    this.translate.use(lang);
+    this.currentLang = lang;
+  }
 }
