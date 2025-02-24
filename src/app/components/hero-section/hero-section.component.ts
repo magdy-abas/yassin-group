@@ -19,10 +19,10 @@ export class HeroSectionComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const backgroundImg = new Image();
-    backgroundImg.src = '../../../assets/images/Background.png';
+    backgroundImg.src = '../../../assets/images/Background.webp';
 
     const hookahImg = new Image();
-    hookahImg.src = '../../../assets/images/hookah.png';
+    hookahImg.src = '../../../assets/images/hookah.webp';
 
     this.langSubscription = this.translationService.currentLanguage$.subscribe(
       (lang) => {

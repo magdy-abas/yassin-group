@@ -27,7 +27,7 @@
     <div *ngIf="!error" class="row g-4" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">
       <div *ngFor="let product of products" class="col-12 col-md-6 col-lg-3" routerLink="/product/{{ product.id }}">
         <div class="product-card" [class.featured]="product.featured">
-          <img src="assets/images/product-bg.png" class="bg-shape-img" alt="bg-img-shape">
+          <img src="../../../assets/images/product-bg.webp" class="bg-shape-img" alt="bg-img-shape">
 
           <div class="product-image">
             <img [src]="product.mainImg" [alt]="product.translations[currentLang()].name" class="">
