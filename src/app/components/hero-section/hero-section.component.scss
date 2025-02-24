@@ -9,8 +9,19 @@
   position: relative;
   max-height: 500px;
 }
+[dir="ltr"] {
+  .hero-section .head-title .yassin-title {
+    font-family: "Princess Sofia", cursive;
+    font-size: 80px;
+    display: inline-flex;
+    font-weight: 400;
+  }
+  .hero-section .yassin-title-group {
+    font-size: 80px;
+  }
+}
 
-.hero-section::before {
+.hero-section .hero-section::before {
   content: "";
   position: absolute;
   top: 0;

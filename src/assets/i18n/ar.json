@@ -5,6 +5,13 @@
     "SERVICE": "الخدمات",
     "CONTACT": "اتصل بنا"
   },
+
+  "HERO": {
+    "YASSIN_GROUP": "مجموعة ياسين",
+    "PREMIUM_HOOKAH": "زجاجيات الشيشة الفاخرة",
+    "ELEVATE_SMOKING_EXPERIENCE": "ارتقِ بتجربة التدخين الخاصة بك"
+  },
+
   "DISCOVER": {
     "TITLE": "اكتشف",
     "DETAILS": "التفاصيل"

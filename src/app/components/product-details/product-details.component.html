@@ -1,4 +1,3 @@
-<!-- product-details.component.html -->
 <app-navbar></app-navbar>
 
 <div class="container-fluid py-4" *ngIf="loading">
@@ -22,7 +21,7 @@
 <div class="container-fluid py-4" *ngIf="product">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10">
-      <div class="product-details-container">
+      <div class="product-details-container" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">
         <div class="row">
           <!-- Product Image Gallery -->
           <div class="col-12 col-md-6 mb-4 mb-md-0">
@@ -30,20 +29,21 @@
               <div class="image-container">
                 <button mat-icon-button class="nav-button prev" (click)="prevImage()"
                   *ngIf="product.images && product.images.length > 1">
-                  <mat-icon>chevron_left</mat-icon>
+                  <mat-icon>{{ currentLang() === 'ar' ? 'chevron_right' : 'chevron_left' }}</mat-icon>
                 </button>
 
-                <img [src]="product.images[currentImageIndex] || product.mainImg" [alt]="product.name"
-                  class="product-main-image">
+                <img [src]="product.images[currentImageIndex] || product.mainImg"
+                  [alt]="product.translations[currentLang()].name" class="product-main-image">
 
                 <button mat-icon-button class="nav-button next" (click)="nextImage()"
                   *ngIf="product.images && product.images.length > 1">
-                  <mat-icon>chevron_right</mat-icon>
+                  <mat-icon>{{ currentLang() === 'ar' ? 'chevron_left' : 'chevron_right' }}</mat-icon>
                 </button>
               </div>
 
               <div class="image-thumbnails" *ngIf="product.images && product.images.length > 1">
-                <img *ngFor="let image of product.images; let i = index" [src]="image" [alt]="'Thumbnail ' + (i + 1)"
+                <img *ngFor="let image of product.images; let i = index" [src]="image"
+                  [alt]="currentLang() === 'ar' ? 'صورة مصغرة ' + (i + 1) : 'Thumbnail ' + (i + 1)"
                   (click)="currentImageIndex = i" [class.active]="currentImageIndex === i">
               </div>
             </div>
@@ -52,32 +52,49 @@
           <!-- Product Info -->
           <div class="col-12 col-md-6 align-content-center">
             <div class="product-info">
-              <h1>{{ product.name }}</h1>
+              <h1>{{ product.translations[currentLang()].name }}</h1>
 
               <div class="product-meta">
-                <span class="category">{{ product.category }}</span>
+                <span class="category">{{ currentLang() === 'ar' ? 'الفئة: ' : 'Category: ' }}{{ product.category
+                  }}</span>
                 <span class="price" *ngIf="product.price">{{ product.price | currency }}</span>
               </div>
 
-              <p class="description">{{ product.description }}</p>
-
-              <div class="product-details" *ngIf="product.details">
+              <p class="description">{{ product.translations[currentLang()].description }}</p>
+              <div class="product-details" *ngIf="hasDetails()">
                 <ul>
-                  <li *ngIf="product.details.brand"><strong>Brand:</strong> {{ product.details.brand }}</li>
-                  <li *ngIf="product.details.color"><strong>Color:</strong> {{ product.details.color }}</li>
-                  <li *ngIf="product.details.material"><strong>Material:</strong> {{ product.details.material }}</li>
+                  <li *ngIf="getProductDetails('brand')">
+                    <strong>{{ currentLang() === 'ar' ? 'الماركة:' : 'Brand:' }}</strong>
+                    {{ getProductDetails('brand') }}
+                  </li>
+                  <li *ngIf="getProductDetails('color')">
+                    <strong>{{ currentLang() === 'ar' ? 'اللون:' : 'Color:' }}</strong>
+                    {{ getProductDetails('color') }}
+                  </li>
+                  <li *ngIf="getProductDetails('material')">
+                    <strong>{{ currentLang() === 'ar' ? 'الخامة:' : 'Material:' }}</strong>
+                    {{ getProductDetails('material') }}
+                  </li>
                 </ul>
               </div>
 
               <div class="additional-specs">
                 <ul>
-                  <li *ngIf="product.height"><strong class="ylw-clr">Height:</strong> {{ product.height }}</li>
-                  <li *ngIf="product.type"><strong class="ylw-clr">Type:</strong> {{ product.type }}</li>
+                  <li *ngIf="product.height">
+                    <strong class="ylw-clr">{{ currentLang() === 'ar' ? 'الارتفاع:' : 'Height:' }}</strong>
+                    {{ product.height }}
+                  </li>
+                  <li *ngIf="product.translations[currentLang()].type">
+                    <strong class="ylw-clr">{{ currentLang() === 'ar' ? 'النوع:' : 'Type:' }}</strong>
+                    {{ product.translations[currentLang()].type }}
+                  </li>
                 </ul>
               </div>
 
               <div class="actions">
-                <button class="mat-primary-btn" mat-raised-button color="primary">contact us</button>
+                <button class="mat-primary-btn" mat-raised-button color="primary">
+                  {{ currentLang() === 'ar' ? 'اتصل بنا' : 'Contact Us' }}
+                </button>
               </div>
             </div>
           </div>
@@ -87,12 +104,17 @@
   </div>
 </div>
 
-<div class="footer ">
+<div class="footer">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 text-center">
         <div class="copyright py-3">
-          <p class="mb-0">© 2024 Yassin Group Hookah. All rights reserved.</p>
+          <p class="mb-0">
+            {{ currentLang() === 'ar'
+            ? '© 2024 مجموعة ياسين للشيشة. جميع الحقوق محفوظة.'
+            : '© 2024 Yassin Group Hookah. All rights reserved.'
+            }}
+          </p>
         </div>
       </div>
     </div>

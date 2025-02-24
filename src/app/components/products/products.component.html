@@ -2,14 +2,20 @@
 <app-hero-section></app-hero-section>
 <section class="discover-section py-5">
   <div class="container">
-    <h2 class="text-white main-title mb-4">Products</h2>
+    <h2 class="text-white main-title mb-4">
+      {{ currentLang() === 'ar' ? 'المنتجات' : 'Products' }}
+    </h2>
 
     <!-- Loading state for initial load -->
     <div *ngIf="loading && products.length === 0" class="text-center py-5">
       <div class="spinner-border text-light" role="status">
-        <span class="visually-hidden">Loading...</span>
+        <span class="visually-hidden">
+          {{ currentLang() === 'ar' ? 'جاري التحميل...' : 'Loading...' }}
+        </span>
       </div>
-      <p class="text-white mt-3">Loading products...</p>
+      <p class="text-white mt-3">
+        {{ currentLang() === 'ar' ? 'جاري تحميل المنتجات...' : 'Loading products...' }}
+      </p>
     </div>
 
     <!-- Error state -->
@@ -18,23 +24,23 @@
     </div>
 
     <!-- Products grid -->
-    <div *ngIf="!error" class="row g-4">
+    <div *ngIf="!error" class="row g-4" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">
       <div *ngFor="let product of products" class="col-12 col-md-6 col-lg-3" routerLink="/product/{{ product.id }}">
         <div class="product-card" [class.featured]="product.featured">
           <img src="assets/images/product-bg.png" class="bg-shape-img" alt="bg-img-shape">
 
           <div class="product-image">
-            <img [src]="product.mainImg" [alt]="product.name" class="img-fluid">
+            <img [src]="product.mainImg" [alt]="product.translations[currentLang()].name" class="img-fluid">
           </div>
 
           <div class="product-info">
             <div class="d-flex justify-content-between align-items-center">
-              <h5>{{ product.name }}</h5>
+              <h5>{{ product.translations[currentLang()].name }}</h5>
               <button class="btn toggle-info-btn">
-                Details
+                {{ currentLang() === 'ar' ? 'التفاصيل' : 'Details' }}
               </button>
             </div>
-            <p class="product-description">{{ product.description }}</p>
+            <p class="product-description">{{ product.translations[currentLang()].description }}</p>
           </div>
         </div>
       </div>
@@ -43,20 +49,26 @@
     <!-- Loading spinner for more products -->
     <div *ngIf="isLoadingMore" class="text-center mt-4">
       <div class="spinner-border text-light" role="status">
-        <span class="visually-hidden">Loading more products...</span>
+        <span class="visually-hidden">
+          {{ currentLang() === 'ar' ? 'جاري تحميل المزيد من المنتجات...' : 'Loading more products...' }}
+        </span>
       </div>
     </div>
 
     <!-- No more products message -->
     <div *ngIf="allProductsLoaded && products.length > 0" class="text-center mt-4 text-white">
-      No more products to load
+      {{ currentLang() === 'ar' ? 'لا يوجد المزيد من المنتجات' : 'No more products to load' }}
     </div>
   </div>
 </section>
 
-<div class="footer ">
-  <div class="copyright " style="padding-bottom: 13px;  margin-top:13px ;">
-    <p>© 2024 Yassin Group Hookah. All rights reserved.</p>
+<div class="footer">
+  <div class="copyright" style="padding-bottom: 13px; margin-top:13px;">
+    <p>
+      {{ currentLang() === 'ar'
+      ? '© 2024 مجموعة ياسين للشيشة. جميع الحقوق محفوظة.'
+      : '© 2024 Yassin Group Hookah. All rights reserved.'
+      }}
+    </p>
   </div>
-
 </div>

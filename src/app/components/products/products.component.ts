@@ -1,19 +1,21 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HeroSectionComponent } from '../hero-section/hero-section.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FirebaseService } from '../../services/firebase.service';
 import { Product } from '../../../Dtos/productDto';
-
+import { TranslationService } from './../../services/translation.service';
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [CommonModule, HeroSectionComponent, NavbarComponent, RouterLink],
+
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit {
+  TranslationService = inject(TranslationService);
   products: Product[] = [];
   loading = true;
   error = '';
@@ -30,7 +32,9 @@ export class ProductsComponent implements OnInit {
     this.loadInitialProducts();
     this.setupInfiniteScroll();
   }
-
+  currentLang(): 'en' | 'ar' {
+    return this.TranslationService.getCurrentLanguage() as 'en' | 'ar';
+  }
   setupInfiniteScroll() {
     this.ngZone.runOutsideAngular(() => {
       window.addEventListener('scroll', this.onWindowScroll.bind(this));

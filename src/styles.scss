@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Princess+Sofia&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 :root {
   --primary-color: #f9a826;
@@ -77,15 +78,23 @@
   --btn2-font-weight: 700;
   --btn2-font-style: normal;
 }
-
+[dir="ltr"] {
+  .hero-section .head-title .yassin-title {
+    font-family: "Princess Sofia", cursive;
+    font-size: 80px;
+    display: inline-flex;
+    font-weight: 400;
+  }
+  .hero-section .yassin-title-group {
+    font-size: 80px;
+  }
+}
 // RTL Styles
 [dir="rtl"] {
   font-family: "Cairo", sans-serif !important;
 
-  // General RTL rules
   text-align: right;
 
-  // Typography
   h1,
   h2,
   h3,
@@ -102,13 +111,10 @@
     font-family: "Cairo", sans-serif !important;
   }
 
-  // Form controls
   input,
   textarea {
     text-align: right;
   }
-
-  // Bootstrap spacing utilities
   .ms-auto {
     margin-left: 0 !important;
     margin-right: auto !important;
@@ -181,22 +187,39 @@
       right: auto;
     }
   }
+  .hero-section {
+    .head-title {
+      h3 {
+        font-size: 4.5rem;
+        font-weight: 600;
+      }
+    }
+    .col-md-6.text-center.text-md-start {
+      text-align: start !important;
+    }
 
-  // Contact section
-  .contact-section {
-    .social-connect {
-      .social-links {
-        flex-direction: row-reverse;
+    .col-md-6.text-center {
+      text-align: start !important;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .hero-section {
+      .col-md-6.text-center.text-md-start {
+        text-align: center !important;
+      }
+
+      .col-md-6.text-center {
+        text-align: center !important;
       }
     }
   }
-
+  .contact-form {
+    label {
+      font-family: "Cairo", sans-serif !important;
+    }
+  }
   // Footer
   .footer {
-    .social-links {
-      flex-direction: row-reverse;
-    }
-
     .footer-links {
       padding-right: 0;
     }
@@ -216,9 +239,23 @@
   .flex-row-reverse {
     flex-direction: row !important;
   }
+  .fa-chevron-right,
+  .fa-chevron-left {
+    transform: rotate(180deg) !important;
+  }
 
-  .flex-row {
-    flex-direction: row-reverse !important;
+  .custom-prev-btn {
+    margin-right: 20px;
+    transform: rotate(180deg) !important;
+  }
+
+  .custom-next-btn {
+    margin-left: 20px;
+    transform: rotate(180deg) !important;
+  }
+
+  .product-image-gallery .mat-icon {
+    transform: translate(5%, -8%) rotate(180deg);
   }
 }
 
@@ -232,7 +269,13 @@ body {
   background-color: #0f172a;
   transition: all 0.3s ease;
 }
-
+.hero-section .main-title {
+  margin: 0;
+  line-height: 0 !important;
+}
+.hero-section .main-title::after {
+  content: none;
+}
 .main-title {
   font-size: 2.5rem;
   font-weight: 600;
@@ -310,6 +353,7 @@ $input-bg: rgba(255, 255, 255, 0.1);
     label {
       margin-bottom: 0.5rem;
       color: $white-color;
+      font-family: cairo;
     }
 
     .form-control {
@@ -514,5 +558,14 @@ $dark-bg: #0b1221;
         max-width: 100%;
       }
     }
+  }
+  .hero-section.col-md-6.text-center.text-md-start {
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .contact-section .contact-info {
+    padding: 20px;
   }
 }

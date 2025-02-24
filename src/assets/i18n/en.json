@@ -5,6 +5,15 @@
     "SERVICE": "Service",
     "CONTACT": "Contact Us"
   },
+
+  "HERO": {
+    "y": "Y",
+    "YASSIN_GROUP": "assin",
+    "Group": "Group",
+    "PREMIUM_HOOKAH": "Premium Hookah Glassware",
+    "ELEVATE_SMOKING_EXPERIENCE": "Elevate Your Smoking Experience"
+  },
+
   "DISCOVER": {
     "TITLE": "Discover",
     "DETAILS": "Details"

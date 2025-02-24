@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../../services/firebase.service';
@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-product-details',
@@ -29,12 +30,23 @@ export class ProductDetailsComponent implements OnInit {
   loading = true;
   error: string | null = null;
   currentImageIndex = 0;
-
+  TranslationService = inject(TranslationService);
   constructor(
     private route: ActivatedRoute,
     private firebaseService: FirebaseService
   ) {}
+  currentLang(): 'en' | 'ar' {
+    return this.TranslationService.getCurrentLanguage() as 'en' | 'ar';
+  }
 
+  // Add this to your component class
+  getProductDetails(field: 'brand' | 'color' | 'material'): string | undefined {
+    return this.product?.translations[this.currentLang()]?.details?.[field];
+  }
+
+  hasDetails(): boolean {
+    return !!this.product?.translations[this.currentLang()]?.details;
+  }
   ngOnInit() {
     // Get the product ID from the route parameter
     const productId = this.route.snapshot.paramMap.get('id');

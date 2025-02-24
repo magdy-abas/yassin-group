@@ -1,7 +1,13 @@
+<!-- dashboard.component.html -->
 <div class="container mx-auto p-6">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Admin Dashboard</mat-card-title>
+      <mat-card-title>{{ isEditing ? 'Edit Product' : 'Admin Dashboard' }}</mat-card-title>
+      <div class="flex-grow"></div>
+      <!-- Reset Button when Editing -->
+      <button *ngIf="isEditing" mat-button color="warn" (click)="resetForm()">
+        Cancel Edit
+      </button>
     </mat-card-header>
 
     <mat-tab-group>
@@ -18,21 +24,30 @@
             <table class="w-full">
               <thead>
                 <tr class="bg-gray-100">
-                  <th class="p-3 text-left">Name</th>
+                  <th class="p-3 text-left">Name (EN/AR)</th>
                   <th class="p-3 text-left">Category</th>
                   <th class="p-3 text-left">Price</th>
+                  <th class="p-3 text-left">Created At</th>
                   <th class="p-3 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let product of products" class="border-b hover:bg-gray-50">
-                  <td class="p-3">{{ product.name }}</td>
+                  <td class="p-3">
+                    <div>{{ product.translations?.en?.name }}</div>
+                    <div class="text-sm text-gray-600 mt-1">{{ product.translations?.ar?.name }}</div>
+                  </td>
                   <td class="p-3">{{ product.category }}</td>
                   <td class="p-3">
                     {{ product.price | currency:'USD':'symbol':'1.2-2' }}
                   </td>
+                  <td class="p-3">{{ product.createdAt | date:'short' }}</td>
                   <td class="p-3 text-right">
-                    <button mat-icon-button color="warn" (click)="deleteProduct(product.id!)">
+                    <button mat-icon-button color="primary" (click)="editProduct(product)" matTooltip="Edit Product">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="deleteProduct(product.id!)"
+                      matTooltip="Delete Product">
                       <mat-icon>delete</mat-icon>
                     </button>
                   </td>
@@ -48,20 +63,110 @@
         </div>
       </mat-tab>
 
-      <!-- Add Product Tab -->
-      <mat-tab label="Add Product">
+      <!-- Add/Edit Product Tab -->
+      <mat-tab [label]="isEditing ? 'Edit Product' : 'Add Product'">
         <div class="p-4">
           <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
-            <!-- Basic Product Information -->
-            <div class="grid md:grid-cols-2 gap-4">
-              <mat-form-field>
-                <mat-label>Product Name</mat-label>
-                <input matInput formControlName="name" placeholder="Enter product name" required>
-                <mat-error *ngIf="f['name'].invalid && f['name'].touched">
-                  Product name is required and must be at least 3 characters
+            <!-- English Product Information -->
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold mb-4">English Information</h3>
+              <div class="grid md:grid-cols-2 gap-4">
+                <mat-form-field>
+                  <mat-label>Product Name (English)</mat-label>
+                  <input matInput formControlName="name" placeholder="Enter product name" required>
+                  <mat-error *ngIf="f['name'].invalid && f['name'].touched">
+                    Product name is required and must be at least 3 characters
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Type (English)</mat-label>
+                  <input matInput formControlName="type" placeholder="Enter product type" required>
+                  <mat-error *ngIf="f['type'].invalid && f['type'].touched">
+                    Type is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <mat-form-field class="w-full">
+                <mat-label>Description (English)</mat-label>
+                <textarea matInput formControlName="description" placeholder="Enter product description" rows="3"
+                  required></textarea>
+                <mat-error *ngIf="f['description'].invalid && f['description'].touched">
+                  Description is required and must be at least 10 characters
                 </mat-error>
               </mat-form-field>
 
+              <!-- English Details -->
+              <div formGroupName="details" class="grid md:grid-cols-3 gap-4 mt-4">
+                <mat-form-field>
+                  <mat-label>Brand (English)</mat-label>
+                  <input matInput formControlName="brand" placeholder="Enter brand">
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Color (English)</mat-label>
+                  <input matInput formControlName="color" placeholder="Enter color">
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Material (English)</mat-label>
+                  <input matInput formControlName="material" placeholder="Enter material">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- Arabic Product Information -->
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold mb-4">Arabic Information</h3>
+              <div class="grid md:grid-cols-2 gap-4">
+                <mat-form-field>
+                  <mat-label>Product Name (Arabic)</mat-label>
+                  <input matInput formControlName="nameAr" placeholder="أدخل اسم المنتج" required dir="rtl">
+                  <mat-error *ngIf="f['nameAr'].invalid && f['nameAr'].touched">
+                    اسم المنتج مطلوب ويجب أن يكون 3 أحرف على الأقل
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Type (Arabic)</mat-label>
+                  <input matInput formControlName="typeAr" placeholder="أدخل نوع المنتج" required dir="rtl">
+                  <mat-error *ngIf="f['typeAr'].invalid && f['typeAr'].touched">
+                    النوع مطلوب
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <mat-form-field class="w-full">
+                <mat-label>Description (Arabic)</mat-label>
+                <textarea matInput formControlName="descriptionAr" placeholder="أدخل وصف المنتج" rows="3" required
+                  dir="rtl"></textarea>
+                <mat-error *ngIf="f['descriptionAr'].invalid && f['descriptionAr'].touched">
+                  الوصف مطلوب ويجب أن يكون 10 أحرف على الأقل
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Arabic Details -->
+              <div formGroupName="details" class="grid md:grid-cols-3 gap-4 mt-4">
+                <mat-form-field>
+                  <mat-label>Brand (Arabic)</mat-label>
+                  <input matInput formControlName="brandAr" placeholder="أدخل الماركة" dir="rtl">
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Color (Arabic)</mat-label>
+                  <input matInput formControlName="colorAr" placeholder="أدخل اللون" dir="rtl">
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Material (Arabic)</mat-label>
+                  <input matInput formControlName="materialAr" placeholder="أدخل المادة" dir="rtl">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- Common Fields -->
+            <div class="grid md:grid-cols-3 gap-4">
               <mat-form-field>
                 <mat-label>Category</mat-label>
                 <mat-select formControlName="category" required>
@@ -73,33 +178,12 @@
                   Category is required
                 </mat-error>
               </mat-form-field>
-            </div>
 
-            <!-- Description -->
-            <mat-form-field class="w-full">
-              <mat-label>Description</mat-label>
-              <textarea matInput formControlName="description" placeholder="Enter product description" rows="3"
-                required></textarea>
-              <mat-error *ngIf="f['description'].invalid && f['description'].touched">
-                Description is required and must be at least 10 characters
-              </mat-error>
-            </mat-form-field>
-
-            <!-- Product Details -->
-            <div class="grid md:grid-cols-3 gap-4">
               <mat-form-field>
                 <mat-label>Height</mat-label>
                 <input matInput formControlName="height" placeholder="Enter product height" required>
                 <mat-error *ngIf="f['height'].invalid && f['height'].touched">
                   Height is required
-                </mat-error>
-              </mat-form-field>
-
-              <mat-form-field>
-                <mat-label>Type</mat-label>
-                <input matInput formControlName="type" placeholder="Enter product type" required>
-                <mat-error *ngIf="f['type'].invalid && f['type'].touched">
-                  Type is required
                 </mat-error>
               </mat-form-field>
 
@@ -110,27 +194,58 @@
             </div>
 
             <!-- Image Uploads -->
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <label class="block mb-2">Main Image</label>
-                <input type="file" (change)="onMainImageSelected($event)" accept="image/*"
-                  class="w-full px-3 py-2 border rounded-md">
+            <div class="space-y-4">
+              <!-- Existing Images (when editing) -->
+              <div *ngIf="isEditing && existingImages.length > 0" class="border p-4 rounded">
+                <h4 class="font-medium mb-3">Existing Images</h4>
+                <div class="grid grid-cols-4 gap-4">
+                  <div *ngFor="let imageUrl of existingImages" class="relative">
+                    <img [src]="imageUrl" alt="Product image" class="w-full h-32 object-cover rounded">
+                    <button mat-icon-button color="warn" class="absolute top-0 right-0"
+                      (click)="removeExistingImage(imageUrl)" type="button">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <label class="block mb-2">Additional Images</label>
-                <input type="file" (change)="onAdditionalImagesSelected($event)" accept="image/*" multiple
-                  class="w-full px-3 py-2 border rounded-md">
+              <!-- New Image Uploads -->
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block mb-2">Main Image</label>
+                  <input type="file" (change)="onMainImageSelected($event)" accept="image/*"
+                    class="w-full px-3 py-2 border rounded-md">
+                </div>
+
+                <div>
+                  <label class="block mb-2">Additional Images</label>
+                  <input type="file" (change)="onAdditionalImagesSelected($event)" accept="image/*" multiple
+                    class="w-full px-3 py-2 border rounded-md">
+                </div>
               </div>
             </div>
 
             <!-- Submit Button -->
-            <button mat-raised-button color="primary" type="submit" class="w-full" [disabled]="productForm.invalid">
-              Add Product
-            </button>
+            <div class="flex gap-4">
+              <button mat-raised-button color="primary" type="submit" class="flex-1"
+                [disabled]="productForm.invalid || isSubmitting">
+                <div class="flex items-center justify-center">
+                  <mat-spinner *ngIf="isSubmitting" [diameter]="20" class="mr-2"></mat-spinner>
+                  <span>{{ isSubmitting ? 'Saving...' : (isEditing ? 'Update Product' : 'Add Product') }}</span>
+                </div>
+              </button>
+
+              <button *ngIf="isEditing" mat-stroked-button type="button" color="warn" (click)="resetForm()"
+                [disabled]="isSubmitting">
+                Cancel
+              </button>
+            </div>
           </form>
         </div>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
 </div>
+
+<!-- Success/Error Messages -->
+<mat-snack-bar-container></mat-snack-bar-container>

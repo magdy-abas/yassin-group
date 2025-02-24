@@ -3,9 +3,22 @@
     <div class="row align-items-center">
       <!-- Text Content -->
       <div class="col-md-6 text-center text-md-start">
-        <h3 class="head-title text-warning">Yassin Group</h3>
-        <h1 class="main-title fw-bold">Premium Hookah Glassware</h1>
-        <p class="sub-title lead">Elevate Your Smoking Experience</p>
+        <h3 class="head-title text-warning ">
+          <h3 class="yassin-title-group">
+            <p *ngIf=" currentLang !== 'ar'" class="yassin-title">
+              {{ 'HERO.y' | translate }}
+            </p>
+            {{ 'HERO.YASSIN_GROUP' | translate }}
+            <p *ngIf="currentLang !== 'ar'">
+              {{ 'HERO.Group' | translate }}
+            </p>
+          </h3>
+        </h3>
+
+        <h1 class="main-title fw-bold">
+          <h3>{{ 'HERO.PREMIUM_HOOKAH' | translate }}</h3>
+        </h1>
+        <p class="sub-title lead">{{ 'HERO.ELEVATE_SMOKING_EXPERIENCE' | translate }}</p>
       </div>
 
       <!-- Image Section -->

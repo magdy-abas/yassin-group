@@ -5,10 +5,12 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { register } from 'swiper/element/bundle';
 import { Swiper } from 'swiper/types';
+import { TranslationService } from '../../services/translation.service';
 
 // Register Swiper web components
 register();
@@ -30,7 +32,8 @@ interface Testimonial {
 export class SwiperComponent implements AfterViewInit {
   @ViewChild('swiper') swiperRef!: ElementRef;
   swiper?: Swiper;
-
+  isRtl!: boolean;
+  translate = inject(TranslationService);
   testimonials: Testimonial[] = [
     {
       name: 'Magdi Abas',
@@ -75,7 +78,9 @@ export class SwiperComponent implements AfterViewInit {
       image: '../../../assets/images/person2.jpg',
     },
   ];
-
+  ngOnInit(): void {
+    this.isRtl = this.translate.isRTL();
+  }
   ngAfterViewInit() {
     // Get the native swiper element
     const swiperEl = this.swiperRef.nativeElement;
