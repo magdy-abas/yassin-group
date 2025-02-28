@@ -125,7 +125,13 @@ body {
   font-family: "Poppins", serif;
   background-color: #0f172a;
   transition: all 0.3s ease;
-  overflow-x: hidden;
+
+  overflow-x: hidden !important;
+
+  -webkit-overflow-x: hidden !important; /* Safari */
+  -moz-overflow-x: hidden !important; /* Firefox */
+  -ms-overflow-x: hidden !important; /* Internet Explorer */
+  -o-overflow-x: hidden !important; /* Opera */
 }
 
 .main-title {
