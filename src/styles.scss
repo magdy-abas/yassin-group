@@ -1246,58 +1246,58 @@ swiper-container {
     }
   }
 
-  // Margin utilities
-  .ms-auto {
-    margin-left: 0 !important;
-    margin-right: auto !important;
-  }
+  // // Margin utilities
+  // .ms-auto {
+  //   margin-left: 0 !important;
+  //   margin-right: auto !important;
+  // }
 
-  .me-auto {
-    margin-right: 0 !important;
-    margin-left: auto !important;
-  }
+  // .me-auto {
+  //   margin-right: 0 !important;
+  //   margin-left: auto !important;
+  // }
 
-  .ms-1 {
-    margin-right: 0.25rem !important;
-    margin-left: 0 !important;
-  }
-  .ms-2 {
-    margin-right: 0.5rem !important;
-    margin-left: 0 !important;
-  }
-  .ms-3 {
-    margin-right: 1rem !important;
-    margin-left: 0 !important;
-  }
-  .ms-4 {
-    margin-right: 1.5rem !important;
-    margin-left: 0 !important;
-  }
-  .ms-5 {
-    margin-right: 3rem !important;
-    margin-left: 0 !important;
-  }
+  // .ms-1 {
+  //   margin-right: 0.25rem !important;
+  //   margin-left: 0 !important;
+  // }
+  // .ms-2 {
+  //   margin-right: 0.5rem !important;
+  //   margin-left: 0 !important;
+  // }
+  // .ms-3 {
+  //   margin-right: 1rem !important;
+  //   margin-left: 0 !important;
+  // }
+  // .ms-4 {
+  //   margin-right: 1.5rem !important;
+  //   margin-left: 0 !important;
+  // }
+  // .ms-5 {
+  //   margin-right: 3rem !important;
+  //   margin-left: 0 !important;
+  // }
 
-  .me-1 {
-    margin-left: 0.25rem !important;
-    margin-right: 0 !important;
-  }
-  .me-2 {
-    margin-left: 0.5rem !important;
-    margin-right: 0 !important;
-  }
-  .me-3 {
-    margin-left: 1rem !important;
-    margin-right: 0 !important;
-  }
-  .me-4 {
-    margin-left: 1.5rem !important;
-    margin-right: 0 !important;
-  }
-  .me-5 {
-    margin-left: 3rem !important;
-    margin-right: 0 !important;
-  }
+  // .me-1 {
+  //   margin-left: 0.25rem !important;
+  //   margin-right: 0 !important;
+  // }
+  // .me-2 {
+  //   margin-left: 0.5rem !important;
+  //   margin-right: 0 !important;
+  // }
+  // .me-3 {
+  //   margin-left: 1rem !important;
+  //   margin-right: 0 !important;
+  // }
+  // .me-4 {
+  //   margin-left: 1.5rem !important;
+  //   margin-right: 0 !important;
+  // }
+  // .me-5 {
+  //   margin-left: 3rem !important;
+  //   margin-right: 0 !important;
+  // }
 
   // Navbar specific
   .navbar {
@@ -1313,6 +1313,11 @@ swiper-container {
   }
   body {
     overflow-x: hidden !important;
+
+    -webkit-overflow-x: hidden !important; /* Safari */
+    -moz-overflow-x: hidden !important; /* Firefox */
+    -ms-overflow-x: hidden !important; /* Internet Explorer */
+    -o-overflow-x: hidden !important; /* Opera */
   }
   .navbar-nav {
     margin-left: 0 !important;

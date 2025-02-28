@@ -150,7 +150,7 @@
 
 
 
-<section class="contact-section py-5">
+<section class="contact-section py-5 overflow-hidden">
 
   <div class="container">
     <h2 class="text-white main-title mb-4">{{ 'CONTACT.TITLE' | translate }} </h2>
@@ -164,8 +164,12 @@
         <p class="mb-4">
           {{ 'CONTACT.DESCRIPTION' | translate }}
         </p>
-        <img src="../../../assets/images/_80.png" alt="Contact Us" class="img-fluid  position-absolute bottom-0" style="    transform: translateX(-82px);
+        <div>
+          <img src="../../../assets/images/_80.png" alt="Contact Us" class="img-fluid  position-absolute bottom-0"
+            style="    transform: translateX(-82px);
 ">
+        </div>
+
         <div class="social-connect">
           <p class="mb-3"> {{ 'CONTACT.CONNECT' | translate }}</p>
           <div class="social-links">
