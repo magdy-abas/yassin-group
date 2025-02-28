@@ -1311,7 +1311,9 @@ swiper-container {
       right: auto;
     }
   }
-
+  body {
+    overflow-x: hidden !important;
+  }
   .navbar-nav {
     margin-left: 0 !important;
     margin-right: auto !important;
