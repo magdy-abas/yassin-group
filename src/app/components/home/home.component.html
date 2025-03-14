@@ -149,75 +149,106 @@
 </section>
 
 
-
 <section class="contact-section py-5 overflow-hidden">
-
   <div class="container">
-    <h2 class="text-white main-title mb-4">{{ 'CONTACT.TITLE' | translate }} </h2>
+    <h2 class="text-white main-title mb-4">{{ 'CONTACT.TITLE' | translate }}</h2>
 
-    <div class="row  justify-content-around">
+    <div class="row justify-content-around">
       <!-- Left Side Content -->
       <div class="col-lg-5 contact-info position-relative">
         <h1 class="mb-2">{{ 'CONTACT.NEED_HELP' | translate }}</h1>
-        <h2 class="mb-4"> <span class="highlight">{{ 'CONTACT.GET_IN_TOUCH' | translate }}</span></h2>
+        <h2 class="mb-4">
+          <span class="highlight">{{ 'CONTACT.GET_IN_TOUCH' | translate }}</span>
+        </h2>
 
         <p class="mb-4">
           {{ 'CONTACT.DESCRIPTION' | translate }}
         </p>
         <div>
-          <img src="../../../assets/images/_80.png" alt="Contact Us" class="img-fluid  position-absolute bottom-0"
-            style="    transform: translateX(-82px);
-">
+          <img src="../../../assets/images/_80.png" alt="Contact Us" class="img-fluid position-absolute bottom-0"
+            style="transform: translateX(-82px);" />
         </div>
 
         <div class="social-connect">
-          <p class="mb-3"> {{ 'CONTACT.CONNECT' | translate }}</p>
+          <p class="mb-3">{{ 'CONTACT.CONNECT' | translate }}</p>
           <div class="social-links">
-            <a href="#" class="social-link whatsapp">
+            <a href="https://wa.me/201119547415" class="social-link whatsapp" target="_blank">
               <i class="fab fa-whatsapp"></i> WhatsApp
             </a>
             <a href="#" class="social-link facebook">
               <i class="fab fa-facebook"></i> Facebook
             </a>
-            <a href="#" class="social-link twitter">
-              <i class="fab fa-twitter"></i> Twitter
+            <a href="https://www.instagram.com/yassingroup2010/" class="social-link instagram" target="_blank">
+              <i class="fab fa-instagram"></i> Instagram
             </a>
           </div>
         </div>
       </div>
 
       <!-- Right Side Form -->
-      <div class="  col-lg-6">
-        <form class="contact-form">
+      <div class="col-lg-6">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
           <div class="mb-3">
-            <label> {{ 'CONTACT.FORM.FULL_NAME' | translate }}</label>
-            <input type="text" class="form-control"
-              placeholder="{{ 'CONTACT.FORM.FULL_NAME_PLACEHOLDER' | translate }}">
+            <label>{{ 'CONTACT.FORM.FULL_NAME' | translate }}</label>
+            <input type="text" class="form-control" formControlName="fullName"
+              placeholder="{{ 'CONTACT.FORM.FULL_NAME_PLACEHOLDER' | translate }}" />
+            <span *ngIf="contactForm.get('fullName')?.touched && contactForm.get('fullName')?.invalid"
+              class="text-danger mt-1">
+              {{ 'CONTACT.FORM.VALIDATION.REQUIRED' | translate }}
+            </span>
           </div>
 
           <div class="mb-3">
             <label>{{ 'CONTACT.FORM.EMAIL' | translate }}</label>
-            <input type="email" class="form-control" placeholder="{{ 'CONTACT.FORM.EMAIL_PLACEHOLDER' | translate }}">
+            <input type="email" class="form-control" formControlName="email"
+              placeholder="{{ 'CONTACT.FORM.EMAIL_PLACEHOLDER' | translate }}" />
+            <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid"
+              class="text-danger mt-1">
+              <span *ngIf="contactForm.get('email')?.errors?.['required']">
+                {{ 'CONTACT.FORM.VALIDATION.REQUIRED' | translate }}
+              </span>
+              <span *ngIf="contactForm.get('email')?.errors?.['email']">
+                {{ 'CONTACT.FORM.VALIDATION.INVALID_EMAIL' | translate }}
+              </span>
+            </div>
           </div>
 
           <div class="mb-3">
             <label>{{ 'CONTACT.FORM.PHONE' | translate }}</label>
-            <input type="tel" class="form-control" placeholder="{{ 'CONTACT.FORM.PHONE_PLACEHOLDER' | translate }}">
+            <input type="tel" class="form-control" formControlName="phone"
+              placeholder="{{ 'CONTACT.FORM.PHONE_PLACEHOLDER' | translate }}" />
+            <span *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.invalid"
+              class="text-danger mt-1">
+              {{ 'CONTACT.FORM.VALIDATION.REQUIRED' | translate }}
+            </span>
           </div>
 
           <div class="mb-4">
             <label>{{ 'CONTACT.FORM.MESSAGE' | translate }}</label>
-            <textarea class="form-control" rows="5"
+            <textarea class="form-control" rows="5" formControlName="message"
               placeholder="{{ 'CONTACT.FORM.MESSAGE_PLACEHOLDER' | translate }}"></textarea>
+            <span *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.invalid"
+              class="text-danger mt-1">
+              {{ 'CONTACT.FORM.VALIDATION.REQUIRED' | translate }}
+            </span>
           </div>
 
-          <button type="submit" class="submit-btn">{{ 'CONTACT.FORM.SUBMIT' | translate }}</button>
+          <button type="submit" class="submit-btn" [disabled]="isSubmitting">
+            <span *ngIf="!isSubmitting">{{ 'CONTACT.FORM.SUBMIT' | translate }}</span>
+            <span *ngIf="isSubmitting">Sending...</span>
+          </button>
+
+          <div *ngIf="submitSuccess" class="text-success mt-2">
+            Email sent successfully!
+          </div>
+          <div *ngIf="submitError" class="text-danger mt-2">
+            {{ submitError }}
+          </div>
         </form>
       </div>
     </div>
   </div>
 </section>
-
 
 <footer class="footer py-5">
   <div class="container">
@@ -240,16 +271,22 @@
       <!-- Email Section -->
       <div class="col-lg-3 col-md-6">
         <h3 class="footer-title">{{ 'FOOTER.EMAIL_US' | translate }}</h3>
-        <a href="mailto:YassinGroup@example.com" class="footer-email">YassinGroup.com</a>
+        <a href="mailto:yassingroup2010@gmail.com" class="footer-email">
+          {{email}}
+        </a>
+
       </div>
 
       <!-- Social Media -->
       <div class="col-lg-3 col-md-6">
         <h3 class="footer-title">{{ 'FOOTER.FOLLOW_US' | translate }}</h3>
         <div class="social-links">
-          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+
+          <a href="https://www.instagram.com/yassingroup2010/" class="social-link instagram" target="_blank">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=100064040650511" target="_blank" class="social-link"><i
+              class="fab fa-facebook-f"></i></a>
         </div>
       </div>
 

@@ -1,4 +1,3 @@
-// dashboard.component.ts
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -7,8 +6,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-
-// Material Modules
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,8 +19,6 @@ import {
   MatSnackBarConfig,
 } from '@angular/material/snack-bar';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-
-// Firebase imports
 import {
   Database,
   ref as dbRef,
@@ -40,8 +35,6 @@ import {
   getDownloadURL,
   deleteObject,
 } from '@angular/fire/storage';
-
-// Services and interfaces
 import { TranslationService } from '../../../services/translation.service';
 import {
   Product,
@@ -121,6 +114,7 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService) {
     this.initializeForm();
   }
+
   logout(): void {
     this.authService.logout();
   }
@@ -164,45 +158,35 @@ export class DashboardComponent implements OnInit {
   }
 
   async loadProducts() {
-    try {
-      this.loading = true;
-      const productsRef = dbRef(this.database, 'products');
-      const snapshot = await get(productsRef);
+    this.loading = true;
+    const productsRef = dbRef(this.database, 'products');
+    const snapshot = await get(productsRef);
 
-      if (snapshot.exists()) {
-        this.products = Object.entries(snapshot.val()).map(([id, data]) => ({
-          id,
-          ...(data as Omit<Product, 'id'>),
-        }));
-      } else {
-        this.products = [];
-      }
-    } catch (error) {
-      console.error('Error loading products:', error);
-      this.showSnackBar('Failed to load products');
-    } finally {
-      this.loading = false;
+    if (snapshot.exists()) {
+      this.products = Object.entries(snapshot.val()).map(([id, data]) => ({
+        id,
+        ...(data as Omit<Product, 'id'>),
+      }));
+    } else {
+      this.products = [];
     }
+    this.loading = false;
   }
 
   async uploadImage(file: File): Promise<string> {
-    try {
-      const fileRef = ref(this.storage, `products/${Date.now()}_${file.name}`);
-      const snapshot = await uploadBytes(fileRef, file);
-      return await getDownloadURL(snapshot.ref);
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      throw error;
-    }
+    const startTime = performance.now();
+    const fileRef = ref(this.storage, `products/${Date.now()}_${file.name}`);
+    const snapshot = await uploadBytes(fileRef, file);
+    const url = await getDownloadURL(snapshot.ref);
+    console.log(`Image upload took ${performance.now() - startTime}ms`);
+    return url;
   }
 
   async deleteImage(imageUrl: string) {
-    try {
-      const imageRef = ref(this.storage, imageUrl);
-      await deleteObject(imageRef);
-    } catch (error) {
-      console.error('Error deleting image:', error);
-    }
+    const startTime = performance.now();
+    const imageRef = ref(this.storage, imageUrl);
+    await deleteObject(imageRef);
+    console.log(`Image delete took ${performance.now() - startTime}ms`);
   }
 
   onMainImageSelected(event: Event) {
@@ -225,95 +209,94 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
-    try {
-      this.isSubmitting = true;
-      const formValue: ProductFormData = this.productForm.value;
+    this.isSubmitting = true;
+    const formValue: ProductFormData = this.productForm.value;
 
-      let mainImgUrl = '';
-      if (this.mainImageFile) {
-        mainImgUrl = await this.uploadImage(this.mainImageFile);
-      }
+    let mainImgUrl = this.isEditing ? this.existingImages[0] || '' : '';
+    const newImageUrls: string[] = [];
 
-      const additionalImgUrls = await Promise.all(
+    if (this.mainImageFile) {
+      mainImgUrl = await this.uploadImage(this.mainImageFile);
+      newImageUrls.push(mainImgUrl);
+    }
+
+    if (this.additionalImageFiles.length > 0) {
+      const additionalUrls = await Promise.all(
         this.additionalImageFiles.map((file) => this.uploadImage(file))
       );
-
-      // Helper function to remove undefined values
-      const cleanDetails = (details: any) => {
-        const cleaned: any = {};
-        Object.keys(details).forEach((key) => {
-          if (details[key]) {
-            cleaned[key] = details[key];
-          }
-        });
-        return Object.keys(cleaned).length > 0 ? cleaned : null;
-      };
-
-      const productData = {
-        translations: {
-          en: {
-            name: formValue.name,
-            description: formValue.description,
-            type: formValue.type,
-            details: cleanDetails({
-              brand: formValue.details.brand || null,
-              color: formValue.details.color || null,
-              material: formValue.details.material || null,
-            }),
-          },
-          ar: {
-            name: formValue.nameAr,
-            description: formValue.descriptionAr,
-            type: formValue.typeAr,
-            details: cleanDetails({
-              brand: formValue.details.brandAr || null,
-              color: formValue.details.colorAr || null,
-              material: formValue.details.materialAr || null,
-            }),
-          },
-        },
-        category: formValue.category,
-        height: formValue.height,
-        price: formValue.price || null,
-        mainImg: mainImgUrl || (this.isEditing ? this.existingImages[0] : ''),
-        images: [
-          ...(this.isEditing ? this.existingImages : []),
-          ...(mainImgUrl ? [mainImgUrl] : []),
-          ...additionalImgUrls,
-        ],
-      };
-
-      const timestamp = new Date().toISOString();
-
-      if (!this.isEditing) {
-        const productsRef = dbRef(this.database, 'products');
-        const newProductRef = push(productsRef);
-        await set(newProductRef, {
-          ...productData,
-          createdAt: timestamp,
-          updatedAt: timestamp,
-        });
-        this.showSnackBar('Product added successfully');
-      } else if (this.currentEditId) {
-        const productRef = dbRef(
-          this.database,
-          `products/${this.currentEditId}`
-        );
-        await update(productRef, {
-          ...productData,
-          updatedAt: timestamp,
-        });
-        this.showSnackBar('Product updated successfully');
-      }
-
-      this.resetForm();
-      await this.loadProducts();
-    } catch (error) {
-      console.error('Error saving product:', error);
-      this.showSnackBar('Failed to save product');
-    } finally {
-      this.isSubmitting = false;
+      newImageUrls.push(...additionalUrls);
     }
+
+    const cleanDetails = (details: any) => {
+      const cleaned: any = {};
+      Object.keys(details).forEach((key) => {
+        if (details[key]) {
+          cleaned[key] = details[key];
+        }
+      });
+      return Object.keys(cleaned).length > 0 ? cleaned : null;
+    };
+
+    const productData = {
+      translations: {
+        en: {
+          name: formValue.name,
+          description: formValue.description,
+          type: formValue.type,
+          details: cleanDetails({
+            brand: formValue.details.brand || null,
+            color: formValue.details.color || null,
+            material: formValue.details.material || null,
+          }),
+        },
+        ar: {
+          name: formValue.nameAr,
+          description: formValue.descriptionAr,
+          type: formValue.typeAr,
+          details: cleanDetails({
+            brand: formValue.details.brandAr || null,
+            color: formValue.details.colorAr || null,
+            material: formValue.details.materialAr || null,
+          }),
+        },
+      },
+      category: formValue.category,
+      height: formValue.height,
+      price: formValue.price || null,
+      mainImg: mainImgUrl,
+      images: [
+        ...(this.isEditing
+          ? this.existingImages.filter((url) => url !== this.existingImages[0])
+          : []),
+        ...newImageUrls,
+      ],
+    };
+
+    const timestamp = new Date().toISOString();
+
+    if (!this.isEditing) {
+      const productsRef = dbRef(this.database, 'products');
+      const newProductRef = push(productsRef);
+      await set(newProductRef, {
+        ...productData,
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      });
+      this.showSnackBar('Product added successfully');
+    } else if (this.currentEditId) {
+      const startTime = performance.now();
+      const productRef = dbRef(this.database, `products/${this.currentEditId}`);
+      await update(productRef, {
+        ...productData,
+        updatedAt: timestamp,
+      });
+      console.log(`Database update took ${performance.now() - startTime}ms`);
+      this.showSnackBar('Product updated successfully');
+    }
+
+    this.resetForm();
+    this.updateLocalProduct();
+    this.isSubmitting = false;
   }
 
   editProduct(product: Product) {
@@ -328,25 +311,20 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
-    try {
-      const productRef = dbRef(this.database, `products/${productId}`);
-      const snapshot = await get(productRef);
-      if (snapshot.exists()) {
-        const product = snapshot.val() as Product;
-        if (product.images && Array.isArray(product.images)) {
-          await Promise.all(
-            product.images.map((imageUrl: string) => this.deleteImage(imageUrl))
-          );
-        }
+    const productRef = dbRef(this.database, `products/${productId}`);
+    const snapshot = await get(productRef);
+    if (snapshot.exists()) {
+      const product = snapshot.val() as Product;
+      if (product.images && Array.isArray(product.images)) {
+        await Promise.all(
+          product.images.map((imageUrl: string) => this.deleteImage(imageUrl))
+        );
       }
-
-      await remove(productRef);
-      await this.loadProducts();
-      this.showSnackBar('Product deleted successfully');
-    } catch (error) {
-      console.error('Error deleting product:', error);
-      this.showSnackBar('Failed to delete product');
     }
+
+    await remove(productRef);
+    this.updateLocalProduct();
+    this.showSnackBar('Product deleted successfully');
   }
 
   resetForm() {
@@ -366,6 +344,19 @@ export class DashboardComponent implements OnInit {
 
   private showSnackBar(message: string) {
     this.snackBar.open(message, 'Close');
+  }
+
+  private updateLocalProduct() {
+    if (this.currentEditId) {
+      const index = this.products.findIndex((p) => p.id === this.currentEditId);
+      if (index !== -1) {
+        this.products[index] = {
+          ...this.products[index],
+          ...this.productForm.value,
+          updatedAt: new Date().toISOString(),
+        };
+      }
+    }
   }
 
   get f() {

@@ -5,7 +5,6 @@
     "SERVICE": "Service",
     "CONTACT": "Contact Us"
   },
-
   "HERO": {
     "y": "Y",
     "YASSIN_GROUP": "assin",
@@ -13,7 +12,6 @@
     "PREMIUM_HOOKAH": "Premium Hookah Glassware",
     "ELEVATE_SMOKING_EXPERIENCE": "Elevate Your Smoking Experience"
   },
-
   "DISCOVER": {
     "TITLE": "Discover",
     "DETAILS": "Details"
@@ -71,7 +69,11 @@
       "PHONE_PLACEHOLDER": "Enter your phone number",
       "MESSAGE": "Message",
       "MESSAGE_PLACEHOLDER": "Type your Message",
-      "SUBMIT": "Submit"
+      "SUBMIT": "Submit",
+      "VALIDATION": {
+        "REQUIRED": "This field is required",
+        "INVALID_EMAIL": "Please enter a valid email address"
+      }
     }
   },
   "FOOTER": {

@@ -1,4 +1,3 @@
-// src/app/services/firebase.service.ts
 import { Injectable, inject } from '@angular/core';
 import {
   Database,
@@ -33,7 +32,7 @@ export class FirebaseService {
   private database: Database = inject(Database);
   private storage: Storage = inject(Storage);
 
-  // Upload image to Firebase Storage (نفس الكود السابق)
+  // Upload image to Firebase Storage
   async uploadImage(file: File): Promise<string> {
     try {
       const storageRef = ref(
@@ -48,7 +47,7 @@ export class FirebaseService {
     }
   }
 
-  // Delete image (نفس الكود السابق)
+  // Delete image
   async deleteImage(imageUrl: string): Promise<void> {
     try {
       const imageRef = ref(this.storage, imageUrl);

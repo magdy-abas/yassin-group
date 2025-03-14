@@ -48,67 +48,6 @@
     #1e293b 140.8%
   );
   --card-gradient: linear-gradient(180deg, #16495c 8.74%, #9498b8 190.61%);
-
-  // Typography
-  --h1-font-family: Poppins-Bold, sans-serif;
-  --h1-font-size: 61px;
-  --h1-line-height: 175%;
-  --h1-font-weight: 700;
-  --h1-font-style: normal;
-
-  --h2-font-family: Poppins-Bold, sans-serif;
-  --h2-font-size: 49px;
-  --h2-line-height: 175%;
-  --h2-font-weight: 700;
-  --h2-font-style: normal;
-
-  --h3-font-family: Poppins-Bold, sans-serif;
-  --h3-font-size: 39px;
-  --h3-line-height: 175%;
-  --h3-font-weight: 700;
-  --h3-font-style: normal;
-
-  --h4-font-family: Poppins-Bold, sans-serif;
-  --h4-font-size: 31px;
-  --h4-line-height: 175%;
-  --h4-font-weight: 700;
-  --h4-font-style: normal;
-
-  --h5-font-family: Poppins-Regular, sans-serif;
-  --h5-font-size: 25px;
-  --h5-line-height: 175%;
-  --h5-font-weight: 400;
-  --h5-font-style: normal;
-
-  --p1-font-family: Poppins-Regular, sans-serif;
-  --p1-font-size: 20px;
-  --p1-line-height: normal;
-  --p1-font-weight: 400;
-  --p1-font-style: normal;
-
-  --p2-font-family: Poppins-Regular, sans-serif;
-  --p2-font-size: 16px;
-  --p2-line-height: normal;
-  --p2-font-weight: 400;
-  --p2-font-style: normal;
-
-  --caption-font-family: Poppins-Bold, sans-serif;
-  --caption-font-size: 13px;
-  --caption-line-height: normal;
-  --caption-font-weight: 700;
-  --caption-font-style: normal;
-
-  --btn1-font-family: Poppins-Bold, sans-serif;
-  --btn1-font-size: 10px;
-  --btn1-line-height: 125%;
-  --btn1-font-weight: 700;
-  --btn1-font-style: normal;
-
-  --btn2-font-family: Poppins-Bold, sans-serif;
-  --btn2-font-size: 8px;
-  --btn2-line-height: 125%;
-  --btn2-font-weight: 700;
-  --btn2-font-style: normal;
 }
 
 // SCSS Variables
@@ -128,10 +67,10 @@ body {
 
   overflow-x: hidden !important;
 
-  -webkit-overflow-x: hidden !important; /* Safari */
-  -moz-overflow-x: hidden !important; /* Firefox */
-  -ms-overflow-x: hidden !important; /* Internet Explorer */
-  -o-overflow-x: hidden !important; /* Opera */
+  -webkit-overflow-x: hidden !important;
+  -moz-overflow-x: hidden !important;
+  -ms-overflow-x: hidden !important;
+  -o-overflow-x: hidden !important;
 }
 
 .main-title {
@@ -1246,59 +1185,6 @@ swiper-container {
     }
   }
 
-  // // Margin utilities
-  // .ms-auto {
-  //   margin-left: 0 !important;
-  //   margin-right: auto !important;
-  // }
-
-  // .me-auto {
-  //   margin-right: 0 !important;
-  //   margin-left: auto !important;
-  // }
-
-  // .ms-1 {
-  //   margin-right: 0.25rem !important;
-  //   margin-left: 0 !important;
-  // }
-  // .ms-2 {
-  //   margin-right: 0.5rem !important;
-  //   margin-left: 0 !important;
-  // }
-  // .ms-3 {
-  //   margin-right: 1rem !important;
-  //   margin-left: 0 !important;
-  // }
-  // .ms-4 {
-  //   margin-right: 1.5rem !important;
-  //   margin-left: 0 !important;
-  // }
-  // .ms-5 {
-  //   margin-right: 3rem !important;
-  //   margin-left: 0 !important;
-  // }
-
-  // .me-1 {
-  //   margin-left: 0.25rem !important;
-  //   margin-right: 0 !important;
-  // }
-  // .me-2 {
-  //   margin-left: 0.5rem !important;
-  //   margin-right: 0 !important;
-  // }
-  // .me-3 {
-  //   margin-left: 1rem !important;
-  //   margin-right: 0 !important;
-  // }
-  // .me-4 {
-  //   margin-left: 1.5rem !important;
-  //   margin-right: 0 !important;
-  // }
-  // .me-5 {
-  //   margin-left: 3rem !important;
-  //   margin-right: 0 !important;
-  // }
-
   // Navbar specific
   .navbar {
     .navbar-nav {
@@ -1314,10 +1200,10 @@ swiper-container {
   body {
     overflow-x: hidden !important;
 
-    -webkit-overflow-x: hidden !important; /* Safari */
-    -moz-overflow-x: hidden !important; /* Firefox */
-    -ms-overflow-x: hidden !important; /* Internet Explorer */
-    -o-overflow-x: hidden !important; /* Opera */
+    -webkit-overflow-x: hidden !important;
+    -moz-overflow-x: hidden !important;
+    -ms-overflow-x: hidden !important;
+    -o-overflow-x: hidden !important;
   }
   .navbar-nav {
     margin-left: 0 !important;
@@ -1561,6 +1447,40 @@ swiper-container {
       color: rgba($white-color, 0.7);
       font-size: 0.9rem;
       margin: 0;
+    }
+  }
+}
+.contact-form {
+  .form-control {
+    background-color: transparent;
+    border: 1px solid #475569;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: border-color 0.3s ease;
+    font-family: "Cairo", sans-serif !important;
+
+    &:focus {
+      border-color: #d1962b;
+      box-shadow: none;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+  }
+
+  .form-label {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+    font-family: "Cairo", sans-serif !important;
+  }
+
+  .submit-btn {
+    &:hover {
+      background-color: darken(#d1962b, 10%);
     }
   }
 }
