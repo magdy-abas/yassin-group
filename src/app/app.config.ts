@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import {
   provideRouter,
   withInMemoryScrolling,
@@ -9,14 +9,14 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 // Firebase imports
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getStorage, provideStorage } from '@angular/fire/storage';
-import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
 import {
-  getAnalytics,
   provideAnalytics,
+  getAnalytics,
   ScreenTrackingService,
   UserTrackingService,
 } from '@angular/fire/analytics';
@@ -25,6 +25,7 @@ import { environment } from '../environments/environment';
 // Translation imports
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { importProvidersFrom } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // Translation loader factory
@@ -41,19 +42,17 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
-    // Firebase providers
-    importProvidersFrom(
-      provideFirebaseApp(() => initializeApp(environment.firebase)),
-      provideFirestore(() => getFirestore()),
-      provideAuth(() => getAuth()),
-      provideStorage(() => getStorage()),
-      provideDatabase(() => getDatabase()),
-      provideAnalytics(() => getAnalytics())
-    ),
-    // Analytics tracking services
+    // Firebase providers (بدون importProvidersFrom)
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
+    provideDatabase(() => getDatabase()),
+    provideAnalytics(() => getAnalytics()),
+
     ScreenTrackingService,
     UserTrackingService,
-    // Translation module configuration
+
     importProvidersFrom(
       TranslateModule.forRoot({
         defaultLanguage: 'en',
