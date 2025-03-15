@@ -1,21 +1,20 @@
 <app-navbar></app-navbar>
 <app-hero-section></app-hero-section>
 
-
+<!-- Discover Section: Load immediately -->
 <section class="discover-section py-5">
   <div class="container">
     <h2 class="text-white main-title mb-4">{{ 'DISCOVER.TITLE' | translate }}</h2>
-
     <div class="row g-4">
       @for (product of products; track product.id; let i = $index) {
       <div class="col-12 col-md-6 col-lg-3">
         <mat-card class="product-card" [class.featured]="product.featured">
-          <img src="../../../assets/images/product-bg.webp" class="bg-shape-img" alt="bg-img-shape">
-
+          <img src="assets/images/product-bg.webp" class="bg-shape-img" alt="bg-img-shape" width="300" height="200"
+            loading="lazy">
           <div class="product-image">
-            <img [src]="product.imageUrl" [alt]="product.title" class="img-fluid">
+            <img [src]="product.imageUrl" [alt]="product.title" class="img-fluid" width="250" height="250"
+              loading="lazy">
           </div>
-
           <mat-expansion-panel hideToggle class="product-info-panel" [expanded]="expandedIndex === i"
             (afterExpand)="expandedIndex = i" (afterCollapse)="expandedIndex = -1">
             <mat-expansion-panel-header class="product-info">
@@ -23,121 +22,98 @@
                 <h5>{{ product.title }}</h5>
               </mat-panel-title>
               <mat-panel-description>
-                <button mat-raised-button color="warn" class="toggle-info-btn">
-                  Details
-                </button>
+                <button mat-raised-button color="warn" class="toggle-info-btn">Details</button>
               </mat-panel-description>
             </mat-expansion-panel-header>
-
             <p class="product-description">{{product.description}}</p>
           </mat-expansion-panel>
         </mat-card>
       </div>
       }
     </div>
-
   </div>
 </section>
 
-
+<!-- About Us Section: Defer until viewport -->
+@defer (on viewport) {
 <section class="about-us-section py-2">
-  <div class="container ">
+  <div class="container">
     <h2 class="text-white main-title mb-4">{{ 'ABOUT.TITLE' | translate }}</h2>
-    <!-- First Row: Logo and About -->
     <div class="row justify-content-center align-items-stretch">
-      <!-- Logo -->
       <div class="col-md-6">
-        <div class="logo-box   text-white rounded shadow h-100 d-flex align-items-center justify-content-center">
-          <img src="../../../assets/images/big-logo.webp" alt="Yassin Group Logo" class="img-fluid">
+        <div class="logo-box text-white rounded shadow h-100 d-flex align-items-center justify-content-center">
+          <img src="assets/images/big-logo.webp" alt="Yassin Group Logo" class="img-fluid" width="300" height="150"
+            loading="lazy">
         </div>
       </div>
-      <!-- About Yassin Group -->
-      <div class="col-md-6 ">
-        <div class="p-4 text-box  text-white rounded shadow h-100 d-flex flex-column">
+      <div class="col-md-6">
+        <div class="p-4 text-box text-white rounded shadow h-100 d-flex flex-column">
           <h2 class="text-warning">{{ 'ABOUT.ABOUT_GROUP.TITLE' | translate }}</h2>
-          <p class="mt-3">
-            {{ 'ABOUT.ABOUT_GROUP.DESCRIPTION' | translate }}
-          </p>
+          <p class="mt-3">{{ 'ABOUT.ABOUT_GROUP.DESCRIPTION' | translate }}</p>
         </div>
       </div>
     </div>
-
-    <!-- Second Row: Vision, Mission, and History -->
     <div class="row mt-5">
-      <!-- Vision -->
       <div class="col-md-4">
         <div class="p-4 text-white rounded shadow h-100 d-flex flex-column">
-          <h3 class="text-warning ">
-            <i class="fas fa-eye"></i> {{ 'ABOUT.VISION.TITLE' | translate }}
-          </h3>
-          <p class="mt-3">
-            {{ 'ABOUT.VISION.DESCRIPTION' | translate }}
-          </p>
+          <h3 class="text-warning"><i class="fas fa-eye"></i> {{ 'ABOUT.VISION.TITLE' | translate }}</h3>
+          <p class="mt-3">{{ 'ABOUT.VISION.DESCRIPTION' | translate }}</p>
         </div>
       </div>
-      <!-- Mission -->
       <div class="col-md-4">
-        <div class="p-4  text-white rounded shadow h-100 d-flex flex-column">
-          <h3 class="text-warning">
-            <i class="fas fa-bullseye"></i> {{ 'ABOUT.MISSION.TITLE' | translate }}
-          </h3>
-          <p class="mt-3">
-            {{ 'ABOUT.MISSION.DESCRIPTION' | translate }}
-          </p>
+        <div class="p-4 text-white rounded shadow h-100 d-flex flex-column">
+          <h3 class="text-warning"><i class="fas fa-bullseye"></i> {{ 'ABOUT.MISSION.TITLE' | translate }}</h3>
+          <p class="mt-3">{{ 'ABOUT.MISSION.DESCRIPTION' | translate }}</p>
         </div>
       </div>
-      <!-- History -->
       <div class="col-md-4">
-        <div class="p-4  text-white rounded shadow h-100 d-flex ">
-          <h3 class="text-warning">
-            <i class="fas fa-history"></i> {{ 'ABOUT.HISTORY.TITLE' | translate }}
-          </h3>
-          <p class="mt-3">
-            {{ 'ABOUT.HISTORY.DESCRIPTION' | translate }}
-          </p>
+        <div class="p-4 text-white rounded shadow h-100 d-flex">
+          <h3 class="text-warning"><i class="fas fa-history"></i> {{ 'ABOUT.HISTORY.TITLE' | translate }}</h3>
+          <p class="mt-3">{{ 'ABOUT.HISTORY.DESCRIPTION' | translate }}</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+} @placeholder {
+<div class="placeholder-section">Loading About Us...</div>
+}
 
-
-<div style="direction: ltr !important; overflow: hidden; " class="container">
+<!-- Swiper Component: Defer until viewport -->
+@defer (on viewport) {
+<div style="direction: ltr !important; overflow: hidden;" class="container">
   <app-swiper></app-swiper>
 </div>
+} @placeholder {
+<div class="placeholder-section">Loading Testimonials...</div>
+}
 
-
+<!-- Our Services Section: Defer until viewport -->
+@defer (on viewport) {
 <section class="our-service py-5">
   <div class="container">
-    <h2 class="text-white main-title mb-4"> {{ 'SERVICES.TITLE' | translate }}</h2>
-
+    <h2 class="text-white main-title mb-4">{{ 'SERVICES.TITLE' | translate }}</h2>
     <div class="row">
-      <!-- Left Column - Main Image -->
       <div class="col-lg-6 mb-4 mb-lg-0">
         <div class="about-img">
-          <img src="../../../assets/images/ourService.webp" alt="About Us" class="img-fluid ">
-
+          <img src="assets/images/ourService.webp" alt="About Us" class="img-fluid" width="500" height="400"
+            loading="lazy">
         </div>
       </div>
-
-      <!-- Right Column - Content -->
       <div class="col-lg-6">
         <div class="about-content">
           <div class="service-item mb-4">
-            <h3 class="text-orange"> {{ 'SERVICES.CUSTOM_DESIGN.TITLE' | translate }}</h3>
+            <h3 class="text-orange">{{ 'SERVICES.CUSTOM_DESIGN.TITLE' | translate }}</h3>
             <p class="text-light">{{ 'SERVICES.CUSTOM_DESIGN.DESCRIPTION' | translate }}</p>
           </div>
-
           <div class="service-item mb-4">
             <h3 class="text-orange">{{ 'SERVICES.DELIVERY.TITLE' | translate }}</h3>
             <p class="text-light">{{ 'SERVICES.DELIVERY.DESCRIPTION' | translate }}</p>
           </div>
-
           <div class="service-item mb-4">
             <h3 class="text-orange">{{ 'SERVICES.BUDGET.TITLE' | translate }}</h3>
             <p class="text-light">{{ 'SERVICES.BUDGET.DESCRIPTION' | translate }}</p>
           </div>
-
           <div class="service-item">
             <h3 class="text-orange">{{ 'SERVICES.PREMIUM.TITLE' | translate }}</h3>
             <p class="text-light">{{ 'SERVICES.PREMIUM.DESCRIPTION' | translate }}</p>
@@ -147,28 +123,24 @@
     </div>
   </div>
 </section>
+} @placeholder {
+<div class="placeholder-section">Loading Services...</div>
+}
 
-
+<!-- Contact Section: Defer until viewport -->
+@defer (on viewport) {
 <section class="contact-section py-5 overflow-hidden">
   <div class="container">
     <h2 class="text-white main-title mb-4">{{ 'CONTACT.TITLE' | translate }}</h2>
-
     <div class="row justify-content-around">
-      <!-- Left Side Content -->
       <div class="col-lg-5 contact-info position-relative">
         <h1 class="mb-2">{{ 'CONTACT.NEED_HELP' | translate }}</h1>
-        <h2 class="mb-4">
-          <span class="highlight">{{ 'CONTACT.GET_IN_TOUCH' | translate }}</span>
-        </h2>
-
-        <p class="mb-4">
-          {{ 'CONTACT.DESCRIPTION' | translate }}
-        </p>
+        <h2 class="mb-4"><span class="highlight">{{ 'CONTACT.GET_IN_TOUCH' | translate }}</span></h2>
+        <p class="mb-4">{{ 'CONTACT.DESCRIPTION' | translate }}</p>
         <div>
-          <img src="../../../assets/images/_80.png" alt="Contact Us" class="img-fluid position-absolute bottom-0"
-            style="transform: translateX(-82px);" />
+          <img src="assets/images/_80.png" alt="Contact Us" class="img-fluid position-absolute bottom-0" width="80"
+            height="80" loading="lazy" style="transform: translateX(-82px);">
         </div>
-
         <div class="social-connect">
           <p class="mb-3">{{ 'CONTACT.CONNECT' | translate }}</p>
           <div class="social-links">
@@ -184,8 +156,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Right Side Form -->
       <div class="col-lg-6">
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
           <div class="mb-3">
@@ -197,7 +167,6 @@
               {{ 'CONTACT.FORM.VALIDATION.REQUIRED' | translate }}
             </span>
           </div>
-
           <div class="mb-3">
             <label>{{ 'CONTACT.FORM.EMAIL' | translate }}</label>
             <input type="email" class="form-control" formControlName="email"
@@ -212,7 +181,6 @@
               </span>
             </div>
           </div>
-
           <div class="mb-3">
             <label>{{ 'CONTACT.FORM.PHONE' | translate }}</label>
             <input type="tel" class="form-control" formControlName="phone"
@@ -222,7 +190,6 @@
               {{ 'CONTACT.FORM.VALIDATION.REQUIRED' | translate }}
             </span>
           </div>
-
           <div class="mb-4">
             <label>{{ 'CONTACT.FORM.MESSAGE' | translate }}</label>
             <textarea class="form-control" rows="5" formControlName="message"
@@ -232,34 +199,30 @@
               {{ 'CONTACT.FORM.VALIDATION.REQUIRED' | translate }}
             </span>
           </div>
-
           <button type="submit" class="submit-btn" [disabled]="isSubmitting">
             <span *ngIf="!isSubmitting">{{ 'CONTACT.FORM.SUBMIT' | translate }}</span>
             <span *ngIf="isSubmitting">Sending...</span>
           </button>
-
-          <div *ngIf="submitSuccess" class="text-success mt-2">
-            Email sent successfully!
-          </div>
-          <div *ngIf="submitError" class="text-danger mt-2">
-            {{ submitError }}
-          </div>
+          <div *ngIf="submitSuccess" class="text-success mt-2">Email sent successfully!</div>
+          <div *ngIf="submitError" class="text-danger mt-2">{{ submitError }}</div>
         </form>
       </div>
     </div>
   </div>
 </section>
+} @placeholder {
+<div class="placeholder-section">Loading Contact...</div>
+}
 
+<!-- Footer: Defer until viewport -->
+@defer (on viewport) {
 <footer class="footer py-5">
   <div class="container">
     <div class="row gy-4">
-      <!-- Company Info -->
       <div class="col-lg-3 col-md-6">
         <h3 class="footer-title">{{ 'FOOTER.COMPANY_NAME' | translate }}</h3>
         <p class="footer-desc">{{ 'FOOTER.COMPANY_DESC' | translate }}</p>
       </div>
-
-      <!-- About Us Links -->
       <div class="col-lg-3 col-md-6">
         <h3 class="footer-title">{{ 'FOOTER.ABOUT_US' | translate }}</h3>
         <ul class="footer-links">
@@ -267,43 +230,28 @@
           <li><a href="#">{{ 'FOOTER.SERVICES' | translate }}</a></li>
         </ul>
       </div>
-
-      <!-- Email Section -->
       <div class="col-lg-3 col-md-6">
         <h3 class="footer-title">{{ 'FOOTER.EMAIL_US' | translate }}</h3>
-        <a href="mailto:yassingroup2010@gmail.com" class="footer-email">
-          {{email}}
-        </a>
-
+        <a href="mailto:yassingroup2010@gmail.com" class="footer-email">{{email}}</a>
       </div>
-
-      <!-- Social Media -->
       <div class="col-lg-3 col-md-6">
         <h3 class="footer-title">{{ 'FOOTER.FOLLOW_US' | translate }}</h3>
         <div class="social-links">
-
-          <a href="https://www.instagram.com/yassingroup2010/" class="social-link instagram" target="_blank">
-            <i class="fab fa-instagram"></i>
-          </a>
+          <a href="https://www.instagram.com/yassingroup2010/" class="social-link instagram" target="_blank"><i
+              class="fab fa-instagram"></i></a>
           <a href="https://www.facebook.com/profile.php?id=100064040650511" target="_blank" class="social-link"><i
               class="fab fa-facebook-f"></i></a>
         </div>
       </div>
-
-      <!-- Newsletter -->
       <div class="col-12 mt-4">
         <div class="newsletter">
           <h3 class="newsletter-title">{{ 'FOOTER.NEWSLETTER.TITLE' | translate }}</h3>
           <div class="input-group">
             <input type="email" class="form-control" placeholder="{{ 'FOOTER.NEWSLETTER.PLACEHOLDER' | translate }}">
-            <button class="btn btn-subscribe" type="button">
-              <i class="fas fa-paper-plane"></i>
-            </button>
+            <button class="btn btn-subscribe" type="button"><i class="fas fa-paper-plane"></i></button>
           </div>
         </div>
       </div>
-
-      <!-- Copyright -->
       <div class="col-12">
         <div class="copyright">
           <p>{{ 'FOOTER.COPYRIGHT' | translate }}</p>
@@ -312,3 +260,6 @@
     </div>
   </div>
 </footer>
+} @placeholder {
+<div class="placeholder-section">Loading Footer...</div>
+}
