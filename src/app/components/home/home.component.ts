@@ -26,7 +26,7 @@ interface HookahProduct {
   standalone: true,
   imports: [
     CommonModule,
-    TranslateModule, // Add this to ensure translations work
+    TranslateModule,
     NavbarComponent,
     HeroSectionComponent,
     MatExpansionModule,
@@ -93,47 +93,29 @@ export class HomeComponent implements OnInit {
             id: 1,
             title: translations.PRODUCTS.HOOKAH1.TITLE,
             description: translations.PRODUCTS.HOOKAH1.DESCRIPTION,
-            imageUrl: 'assets/images/pngwing-com-3-116.webp',
+            imageUrl: 'assets/images/s1.webp',
             featured: true,
           },
           {
             id: 2,
             title: translations.PRODUCTS.HOOKAH2.TITLE,
             description: translations.PRODUCTS.HOOKAH2.DESCRIPTION,
-            imageUrl: 'assets/images/pngwing-com-3-116.webp',
+            imageUrl: 'assets/images/s2.webp',
             featured: true,
           },
           {
             id: 3,
             title: translations.PRODUCTS.HOOKAH3.TITLE,
             description: translations.PRODUCTS.HOOKAH3.DESCRIPTION,
-            imageUrl: 'assets/images/pngwing-com-3-116.webp',
+            imageUrl: 'assets/images/s3.webp',
             featured: true,
           },
           {
             id: 4,
             title: translations.PRODUCTS.HOOKAH4.TITLE,
             description: translations.PRODUCTS.HOOKAH4.DESCRIPTION,
-            imageUrl: 'assets/images/pngwing-com-3-116.webp',
+            imageUrl: 'assets/images/s4.webp',
             featured: true,
-          },
-        ];
-
-        this.testimonials = [
-          {
-            name: 'Magdi Abas',
-            image: 'assets/images/customer1.webp',
-            feedback: translations.TESTIMONIALS.CUSTOMER1.FEEDBACK,
-          },
-          {
-            name: 'Ahmed Elsayed',
-            image: 'assets/images/customer2.webp',
-            feedback: translations.TESTIMONIALS.CUSTOMER2.FEEDBACK,
-          },
-          {
-            name: 'Maged Ayman',
-            image: 'assets/images/customer3.webp',
-            feedback: translations.TESTIMONIALS.CUSTOMER3.FEEDBACK,
           },
         ];
       });

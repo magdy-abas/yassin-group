@@ -108,19 +108,16 @@
       "DESCRIPTION": "A stylish and innovative hookah with LED lights"
     }
   },
-  "TESTIMONIALS": {
-    "CUSTOMER1": {
-      "FEEDBACK": "I have been using the hookah glass from this company for several months, and I am truly satisfied with its quality."
-    },
-    "CUSTOMER2": {
-      "FEEDBACK": "The customer service was excellent, and I received my order quickly."
-    },
-    "CUSTOMER3": {
-      "FEEDBACK": "I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste."
-    }
-  },
+
   "testimonial": {
     "h2": "Here is what our customers have to say",
     "p": "Hear from those who have experienced our quality firsthand"
+  },
+  "testimonials": {
+    "omar": "I have been using the hookah glass from this company for several months, and I am truly satisfied with its quality. The glass is durable, doesn't easily warp with heat.",
+    "ahmed": "The customer service was excellent, and I received my order quickly. The product was exactly as expected. The glass is smooth and flawless, and I haven't had any issues during use.",
+    "khalid": "I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.",
+    "mohamed": "I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.",
+    "company": "Crafted for excellence, our premium hookah glass combines durability, elegance, and heat resistance for a flawless smoking experience. With unique designs and top-tier craftsmanship, we redefine quality and style in every piece."
   }
 }

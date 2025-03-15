@@ -1,4 +1,4 @@
-<section class="testimonial py-5">
+<section class="testimonial py-5" *ngIf="!isLoading">
   <div class="swiper-width">
     <div class="header">
       <h2>{{ 'testimonial.h2' | translate }}</h2>
@@ -6,21 +6,55 @@
     </div>
 
     <div class="swiper-container position-relative">
-      <img src="../../../assets/images/vector0.svg" alt="vector0" class="img-fluid position-absolute start-50 top-0">
-      <swiper-container #swiper slides-per-view="3" space-between="20" pagination="false" loop="true" autoplay="true"
-        autoplay-delay="3000" autoplay-disable-on-interaction="false" breakpoints='{
-        "0": { "slidesPerView": 1, "spaceBetween": 10 },
-        "768": { "slidesPerView": 2, "spaceBetween": 15 },
-        "1024": { "slidesPerView": 3, "spaceBetween": 20 }
-      }' class="mySwiper">
-        <swiper-slide *ngFor="let testimonial of testimonials">
+      <img src="../../../assets/images/vector0.svg" alt="vector0" class="img-fluid position-absolute start-50 top-0"
+        loading="lazy">
+
+      <!-- Swiper Container -->
+      <swiper-container #swiper [slidesPerView]="3" [spaceBetween]="20" [pagination]="false" [loop]="true"
+        [autoplay]="{ delay: 3000, disableOnInteraction: false }" [breakpoints]="swiperBreakpoints" class="mySwiper">
+
+        <!-- Static Testimonial 1 -->
+        <swiper-slide>
           <div class="testimonial-card">
-            <img [src]="testimonial.image" [alt]="testimonial.name">
+            <img src="../../../assets/images/user.webp" alt="Omar Mohamed" loading="lazy">
             <i class="fas fa-quote-left"></i>
-            <h3>{{ testimonial.name }}</h3>
-            <p>{{ testimonial.quote }}</p>
+            <h3>Omar Mohamed</h3>
+            <p>{{ 'testimonials.omar' | translate }}</p>
           </div>
         </swiper-slide>
+
+        <!-- Static Testimonial 2 -->
+        <swiper-slide>
+          <div class="testimonial-card">
+            <img src="../../../assets/images/user.webp" alt="Ahmed Elsayed" loading="lazy">
+            <i class="fas fa-quote-left"></i>
+            <h3>Ahmed Elsayed</h3>
+            <p>{{ 'testimonials.ahmed' | translate }}</p>
+          </div>
+        </swiper-slide>
+
+        <!-- Static Testimonial 3 -->
+        <swiper-slide>
+          <div class="testimonial-card">
+            <img src="../../../assets/images/user.webp" alt="Khalid Salah" loading="lazy">
+            <i class="fas fa-quote-left"></i>
+            <h3>Khalid Salah</h3>
+            <p>{{ 'testimonials.khalid' | translate }}</p>
+          </div>
+        </swiper-slide>
+
+        <!-- Static Testimonial 4 -->
+        <swiper-slide>
+          <div class="testimonial-card">
+            <img src="../../../assets/images/user.webp" alt="Mohamed Majdy" loading="lazy">
+            <i class="fas fa-quote-left"></i>
+            <h3>Mohamed Majdy</h3>
+            <p>{{ 'testimonials.company' | translate }}</p>
+          </div>
+        </swiper-slide>
+
+
+
       </swiper-container>
 
       <!-- Custom Navigation Buttons -->

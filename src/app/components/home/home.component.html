@@ -12,7 +12,7 @@
           <img src="assets/images/product-bg.webp" class="bg-shape-img" alt="bg-img-shape" width="300" height="200"
             loading="lazy">
           <div class="product-image">
-            <img [src]="product.imageUrl" [alt]="product.title" class="img-fluid" width="250" height="250"
+            <img [src]="product.imageUrl" [alt]="product.title" class="img-fluid" width="400" height="400"
               loading="lazy">
           </div>
           <mat-expansion-panel hideToggle class="product-info-panel" [expanded]="expandedIndex === i"
@@ -90,7 +90,7 @@
 
 <!-- Our Services Section: Defer until viewport -->
 @defer (on viewport) {
-<section class="our-service py-5">
+<section class="our-service py-5" id="services-section">
   <div class="container">
     <h2 class="text-white main-title mb-4">{{ 'SERVICES.TITLE' | translate }}</h2>
     <div class="row">
@@ -127,9 +127,9 @@
 <div class="placeholder-section">Loading Services...</div>
 }
 
-<!-- Contact Section: Defer until viewport -->
+
 @defer (on viewport) {
-<section class="contact-section py-5 overflow-hidden">
+<section class="contact-section py-5 overflow-hidden" id="contact-section">
   <div class="container">
     <h2 class="text-white main-title mb-4">{{ 'CONTACT.TITLE' | translate }}</h2>
     <div class="row justify-content-around">
@@ -138,8 +138,8 @@
         <h2 class="mb-4"><span class="highlight">{{ 'CONTACT.GET_IN_TOUCH' | translate }}</span></h2>
         <p class="mb-4">{{ 'CONTACT.DESCRIPTION' | translate }}</p>
         <div>
-          <img src="assets/images/_80.png" alt="Contact Us" class="img-fluid position-absolute bottom-0" width="80"
-            height="80" loading="lazy" style="transform: translateX(-82px);">
+          <img src="assets/images/_80.png" alt="Contact Us" class="img-fluid position-absolute bottom-0" width="300"
+            height="300" loading="lazy" style="transform: translateX(-82px);">
         </div>
         <div class="social-connect">
           <p class="mb-3">{{ 'CONTACT.CONNECT' | translate }}</p>
@@ -147,7 +147,7 @@
             <a href="https://wa.me/201119547415" class="social-link whatsapp" target="_blank">
               <i class="fab fa-whatsapp"></i> WhatsApp
             </a>
-            <a href="#" class="social-link facebook">
+            <a href="https://www.facebook.com/profile.php?id=100064040650511" class="social-link facebook">
               <i class="fab fa-facebook"></i> Facebook
             </a>
             <a href="https://www.instagram.com/yassingroup2010/" class="social-link instagram" target="_blank">

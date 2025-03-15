@@ -943,11 +943,17 @@ swiper-container {
 
   p {
     color: var(--text-light);
-    font-size: 18px;
+    font-size: 17px;
     padding: 0 10px;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
 
+section {
+  scroll-margin-top: 70px; /* Adjust based on your navbar height */
+}
 // Swiper Container Customizations
 .swiper-container {
   position: relative;

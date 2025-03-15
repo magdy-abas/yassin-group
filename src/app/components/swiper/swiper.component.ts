@@ -5,6 +5,7 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
+  OnDestroy,
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,15 +13,10 @@ import { register } from 'swiper/element/bundle';
 import { Swiper } from 'swiper/types';
 import { TranslationService } from '../../services/translation.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 // Register Swiper web components
 register();
-
-interface Testimonial {
-  name: string;
-  quote: string;
-  image: string;
-}
 
 @Component({
   selector: 'app-swiper',
@@ -30,49 +26,61 @@ interface Testimonial {
   styleUrl: './swiper.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SwiperComponent implements AfterViewInit {
+export class SwiperComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('swiper') swiperRef!: ElementRef;
   swiper?: Swiper;
-  isRtl!: boolean;
   translate = inject(TranslationService);
-  testimonials: Testimonial[] = [
-    {
-      name: 'Magdi Abas',
-      quote:
-        "I have been using the hookah glass from this company for several months, and I am truly satisfied with its quality. The glass is durable, doesn't easily warp with heat.",
-      image: '../../../assets/images/person2.webp',
-    },
-    {
-      name: 'Ahmed Elsayed',
-      quote:
-        "The customer service was excellent, and I received my order quickly. The product was exactly as expected. The glass is smooth and flawless, and I haven't had any issues during use.",
-      image: '../../../assets/images/person-1.webp',
-    },
-    {
-      name: 'Maged Ayman',
-      quote:
-        'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
-      image: '../../../assets/images/person2.webp',
-    },
-    {
-      name: 'Maged Ayman',
-      quote:
-        'I loved the variety of designs this company offers; each piece reflects a unique and exquisite taste. I will definitely continue purchasing your products.',
-      image: '../../../assets/images/person2.webp',
-    },
-  ];
+  isLoading: boolean = true;
+  private langChangeSubscription?: Subscription;
+
+  swiperBreakpoints = {
+    0: { slidesPerView: 1, spaceBetween: 10 },
+    768: { slidesPerView: 2, spaceBetween: 15 },
+    1024: { slidesPerView: 3, spaceBetween: 20 },
+  };
+
   ngOnInit(): void {
-    this.isRtl = this.translate.isRTL();
+    this.translate.currentLanguage$.subscribe(() => {
+      this.isLoading = false;
+    });
+
+    this.langChangeSubscription = this.translate.currentLanguage$.subscribe(
+      () => {
+        this.refreshSwiper();
+      }
+    );
   }
+
   ngAfterViewInit() {
-    // Get the native swiper element
-    const swiperEl = this.swiperRef.nativeElement;
-
-    // Access the Swiper instance
-    this.swiper = swiperEl.swiper;
+    this.initializeSwiper();
   }
 
-  // Custom navigation methods
+  ngOnDestroy() {
+    if (this.langChangeSubscription) {
+      this.langChangeSubscription.unsubscribe();
+    }
+
+    if (this.swiper) {
+      this.swiper.destroy();
+    }
+  }
+  initializeSwiper() {
+    const swiperEl = this.swiperRef.nativeElement;
+    this.swiper = swiperEl.swiper;
+
+    setTimeout(() => {
+      this.swiper?.update();
+    }, 0);
+  }
+
+  refreshSwiper() {
+    if (this.swiper) {
+      setTimeout(() => {
+        this.swiper?.update();
+      }, 0);
+    }
+  }
+
   goToPrevSlide() {
     this.swiper?.slidePrev();
   }
