@@ -92,23 +92,22 @@
   },
   "PRODUCTS": {
     "HOOKAH1": {
-      "TITLE": "Blue Hookah with silver",
-      "DESCRIPTION": "The Best Hookah at Unbeatable Prices with some gold touches"
+      "TITLE": "Luxury Hookah",
+      "DESCRIPTION": "The best hookah at unbeatable prices with touches of gold"
     },
     "HOOKAH2": {
-      "TITLE": "Red Hookah with gold",
-      "DESCRIPTION": "An elegant Hookah with a premium design"
+      "TITLE": "Pharaonic Hookah",
+      "DESCRIPTION": "An elegant hookah with a luxurious design"
     },
     "HOOKAH3": {
-      "TITLE": "Classic Black Hookah",
+      "TITLE": "Pharaonic Hookah",
       "DESCRIPTION": "A traditional style with modern craftsmanship"
     },
     "HOOKAH4": {
-      "TITLE": "Glass Hookah ",
-      "DESCRIPTION": "A stylish and innovative hookah with LED lights"
+      "TITLE": "Classic Hookah",
+      "DESCRIPTION": "A stylish and innovative hookah"
     }
   },
-
   "testimonial": {
     "h2": "Here is what our customers have to say",
     "p": "Hear from those who have experienced our quality firsthand"

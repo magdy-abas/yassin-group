@@ -22,7 +22,8 @@
                 <h5>{{ product.title }}</h5>
               </mat-panel-title>
               <mat-panel-description>
-                <button mat-raised-button color="warn" class="toggle-info-btn">Details</button>
+                <button mat-raised-button color="warn" class="toggle-info-btn">{{'DISCOVER.DETAILS' |
+                  translate}}</button>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <p class="product-description">{{product.description}}</p>
@@ -79,16 +80,14 @@
 <div class="placeholder-section">Loading About Us...</div>
 }
 
-<!-- Swiper Component: Defer until viewport -->
-@defer (on viewport) {
+
+
 <div style="direction: ltr !important; overflow: hidden;" class="container">
   <app-swiper></app-swiper>
 </div>
-} @placeholder {
-<div class="placeholder-section">Loading Testimonials...</div>
-}
 
-<!-- Our Services Section: Defer until viewport -->
+
+
 @defer (on viewport) {
 <section class="our-service py-5" id="services-section">
   <div class="container">
@@ -141,7 +140,7 @@
           <img src="assets/images/_80.png" alt="Contact Us" class="img-fluid position-absolute bottom-0" width="300"
             height="300" loading="lazy" style="transform: translateX(-82px);">
         </div>
-        <div class="social-connect">
+        <div class="social-connect position-relative z-3">
           <p class="mb-3">{{ 'CONTACT.CONNECT' | translate }}</p>
           <div class="social-links">
             <a href="https://wa.me/201119547415" class="social-link whatsapp" target="_blank">

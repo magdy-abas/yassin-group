@@ -27,18 +27,25 @@
           <div class="col-12 col-md-6 mb-4 mb-md-0">
             <div class="product-image-gallery">
               <div class="image-container">
-                <button mat-icon-button class="nav-button prev" (click)="prevImage()"
-                  *ngIf="product.images && product.images.length > 1">
-                  <mat-icon>{{ currentLang() === 'ar' ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+                <button mat-icon-button class="nav-button prev d-flex justify-content-center align-items-center"
+                  (click)="prevImage()" *ngIf="product.images && product.images.length > 1">
+
+                  <i [class]="currentLang() === 'ar' ? 'fas fa-chevron-right' : 'fas fa-chevron-left'">
+                  </i>
+
                 </button>
 
                 <img [src]="product.images[currentImageIndex] || product.mainImg"
                   [alt]="product.translations[currentLang()].name" class="product-main-image">
 
-                <button mat-icon-button class="nav-button next" (click)="nextImage()"
-                  *ngIf="product.images && product.images.length > 1">
-                  <mat-icon>{{ currentLang() === 'ar' ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+                <button mat-icon-button class="nav-button next d-flex justify-content-center align-items-center"
+                  (click)="nextImage()" *ngIf="product.images && product.images.length > 1">
+
+                  <i [class]="currentLang() === 'ar' ? 'fas fa-chevron-left' : 'fas fa-chevron-right'">
+                  </i>
+
                 </button>
+
               </div>
 
               <div class="image-thumbnails" *ngIf="product.images && product.images.length > 1">
