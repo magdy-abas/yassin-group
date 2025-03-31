@@ -1,6 +1,6 @@
 // navbar.component.ts
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { TranslationService } from '../../services/translation.service';
@@ -15,10 +15,37 @@ import { TranslationService } from '../../services/translation.service';
 export class NavbarComponent implements OnInit {
   currentLang: string = 'en';
 
-  constructor(private translationService: TranslationService) {}
+  constructor(
+    private translationService: TranslationService,
+    private router: Router
+  ) {}
+  navigateToSection(sectionId: string) {
+    if (this.router.url.startsWith('/home')) {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        const yOffset = -20;
+        const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    } else {
+      this.router.navigate(['/home'], { fragment: sectionId });
+    }
+  }
+
+  navigateToProductsSection() {
+    if (this.router.url.startsWith('/products')) {
+      const el = document.getElementById('products-grid');
+      if (el) {
+        const yOffset = -120;
+        const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    } else {
+      this.router.navigate(['/products'], { fragment: 'products-grid' });
+    }
+  }
 
   ngOnInit() {
-    // Get saved language on component init
     const savedLang = localStorage.getItem('selectedLanguage');
     if (savedLang) {
       this.currentLang = savedLang;

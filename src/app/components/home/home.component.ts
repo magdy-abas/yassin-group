@@ -9,9 +9,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { SwiperComponent } from '../swiper/swiper.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 interface HookahProduct {
   id: number;
@@ -49,11 +50,14 @@ export class HomeComponent implements OnInit {
   isSubmitting = false;
   submitSuccess = false;
   submitError: string | null = null;
-
+  fragment: string | null = null;
+  showContactSection = false;
   constructor(
     private translationService: TranslationService,
     private translate: TranslateService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private viewportScroller: ViewportScroller,
+    private route: ActivatedRoute
   ) {
     this.currentLang = this.translate.currentLang || 'en';
 
@@ -80,8 +84,35 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     emailjs.init('gFdBihYV4hyk0sDbX');
+
+    this.route.fragment.subscribe((frag) => {
+      this.fragment = frag;
+      this.showContactSection = true;
+
+      if (frag) {
+        const tryScroll = (retries: number = 10) => {
+          const el = document.getElementById(frag);
+          if (el) {
+            const yOffset = -120;
+            const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          } else if (retries > 0) {
+            setTimeout(() => tryScroll(retries - 1), 150);
+          }
+        };
+        tryScroll();
+      }
+    });
+  }
+  scrollToSection(id: string) {
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -20;
+      const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   }
 
   private loadTranslations() {

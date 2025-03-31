@@ -305,22 +305,49 @@ export class DashboardComponent implements OnInit {
     this.existingImages = product.images || [];
     this.initializeForm(product);
   }
-
   async deleteProduct(productId: string) {
-    const productRef = dbRef(this.database, `products/${productId}`);
-    const snapshot = await get(productRef);
-    if (snapshot.exists()) {
-      const product = snapshot.val() as Product;
-      if (product.images && Array.isArray(product.images)) {
-        await Promise.all(
-          product.images.map((imageUrl: string) => this.deleteImage(imageUrl))
-        );
-      }
+    if (!this.authService.isAdminLoggedIn()) {
+      this.showSnackBar('You must be logged in as admin to delete products');
+      return;
     }
 
-    await remove(productRef);
-    this.updateLocalProduct();
-    this.showSnackBar('Product deleted successfully');
+    const isConfirmed = window.confirm(
+      'Are you sure you want to delete this product? This action cannot be undone.'
+    );
+
+    if (isConfirmed) {
+      try {
+        const productRef = dbRef(this.database, `products/${productId}`);
+        const snapshot = await get(productRef);
+
+        if (snapshot.exists()) {
+          const product = snapshot.val() as Product;
+          if (product.images && Array.isArray(product.images)) {
+            await Promise.all(
+              product.images.map(async (imageUrl: string) => {
+                try {
+                  await this.deleteImage(imageUrl);
+                  console.log(`Deleted image: ${imageUrl}`);
+                } catch (error) {
+                  console.warn(`Failed to delete image ${imageUrl}:`, error);
+                }
+              })
+            );
+          }
+        }
+
+        await remove(productRef);
+        this.products = this.products.filter((p) => p.id !== productId);
+        this.showSnackBar('Product deleted successfully');
+      } catch (error) {
+        console.error('Error deleting product:', error);
+        this.showSnackBar(
+          'Failed to delete product. Check permissions or console.'
+        );
+      }
+    } else {
+      this.showSnackBar('Deletion canceled');
+    }
   }
 
   resetForm() {

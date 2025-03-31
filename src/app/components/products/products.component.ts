@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HeroSectionComponent } from '../hero-section/hero-section.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FirebaseService } from '../../services/firebase.service';
@@ -21,17 +21,32 @@ export class ProductsComponent implements OnInit {
   error = '';
   lastKey: string | null = null;
   allProductsLoaded = false;
-  isLoadingMore = false; // New flag to differentiate initial and subsequent loading
+  isLoadingMore = false;
 
   constructor(
     private firebaseService: FirebaseService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.loadInitialProducts();
     this.setupInfiniteScroll();
+
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment === 'products-grid') {
+        setTimeout(() => {
+          const el = document.getElementById(fragment);
+          if (el) {
+            const yOffset = -120; // Adjust if you have a fixed navbar
+            const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 500);
+      }
+    });
   }
+
   currentLang(): 'en' | 'ar' {
     return this.TranslationService.getCurrentLanguage() as 'en' | 'ar';
   }

@@ -36,7 +36,6 @@ export class TranslationService {
       return;
     }
 
-    // If no saved language, try to get from Firebase if user is logged in
     const user = this.auth.currentUser;
     if (user) {
       try {

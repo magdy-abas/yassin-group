@@ -1,11 +1,10 @@
 export const environment = {
-  production: false,
+  production: true,
   firebase: {
-    databaseURL:
-      'https://yassin-group-default-rtdb.europe-west1.firebasedatabase.app/',
-
     apiKey: 'AIzaSyAe7X_9HomzhpFPvUgji41wx--eztXTYTY',
     authDomain: 'yassin-group.firebaseapp.com',
+    databaseURL:
+      'https://yassin-group-default-rtdb.europe-west1.firebasedatabase.app',
     projectId: 'yassin-group',
     storageBucket: 'yassin-group.firebasestorage.app',
     messagingSenderId: '432984599688',

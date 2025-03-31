@@ -99,9 +99,11 @@
               </div>
 
               <div class="actions">
-                <button class="mat-primary-btn" mat-raised-button color="primary">
+                <button class="mat-primary-btn" mat-raised-button color="primary" [routerLink]="['/home']"
+                  [fragment]="'contact-section'">
                   {{ currentLang() === 'ar' ? 'اتصل بنا' : 'Contact Us' }}
                 </button>
+
               </div>
             </div>
           </div>

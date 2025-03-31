@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <app-hero-section></app-hero-section>
-<section class="discover-section py-5">
+<section class="discover-section py-5" id="products-grid">
   <div class="container">
     <h2 class="text-white main-title mb-4">
       {{ currentLang() === 'ar' ? 'المنتجات' : 'Products' }}
@@ -24,7 +24,7 @@
     </div>
 
     <!-- Products grid -->
-    <div *ngIf="!error" class="row g-4" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">
+    <div *ngIf="!error" class="row g-4 " [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">
       <div *ngFor="let product of products" class="col-12 col-md-6 col-lg-3" routerLink="/product/{{ product.id }}">
         <div class="product-card" [class.featured]="product.featured">
           <img src="../../../assets/images/product-bg.webp" class="bg-shape-img" alt="bg-img-shape">

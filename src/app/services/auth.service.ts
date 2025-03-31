@@ -1,75 +1,81 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import {
+  Auth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  User,
+} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private isAdminLoggedInSubject = new BehaviorSubject<boolean>(
-    this.hasAdminToken()
-  );
+  private isAdminLoggedInSubject = new BehaviorSubject<boolean>(false);
   public isAdminLoggedIn$: Observable<boolean> =
     this.isAdminLoggedInSubject.asObservable();
 
-  private readonly ADMIN_USERNAME = 'yassin';
-  private readonly ADMIN_PASSWORD = 'yassin#012012';
-  private readonly TOKEN_EXPIRY_TIME = 3600000 * 68;
+  private readonly ADMIN_UID = '7hXyj3YMbYcbWuSreojixEKgMpy1';
 
-  constructor(private router: Router) {}
+  private auth = inject(Auth);
+  private router = inject(Router);
 
-  login(username: string, password: string): boolean {
-    if (username === this.ADMIN_USERNAME && password === this.ADMIN_PASSWORD) {
-      const token = this.generateSecureToken();
-      const expiryDate = Date.now() + this.TOKEN_EXPIRY_TIME;
+  constructor() {
+    const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+    this.isAdminLoggedInSubject.next(isLoggedIn);
 
-      localStorage.setItem('admin_token', token);
-      localStorage.setItem('token_expiry', expiryDate.toString());
+    onAuthStateChanged(this.auth, (user) => {
+      const isAdmin = user?.uid === this.ADMIN_UID;
+      this.isAdminLoggedInSubject.next(isAdmin);
 
-      this.isAdminLoggedInSubject.next(true);
-      return true;
-    }
-    return false;
+      if (isAdmin) {
+        localStorage.setItem('adminLoggedIn', 'true');
+      } else {
+        localStorage.removeItem('adminLoggedIn');
+      }
+    });
   }
 
-  logout(): void {
-    localStorage.removeItem('admin_token');
-    localStorage.removeItem('token_expiry');
-    this.isAdminLoggedInSubject.next(false);
-    this.router.navigate(['/home']);
-  }
+  async login(email: string, password: string): Promise<boolean> {
+    try {
+      const result = await signInWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
 
-  private generateSecureToken(length = 64): string {
-    const charset =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
-    let token = '';
-    const randomValues = window.crypto.getRandomValues(new Uint8Array(length));
-
-    for (let i = 0; i < randomValues.length; i++) {
-      token += charset[randomValues[i] % charset.length];
-    }
-
-    return token;
-  }
-
-  private hasAdminToken(): boolean {
-    const token = localStorage.getItem('admin_token');
-    const tokenExpiry = localStorage.getItem('token_expiry');
-
-    if (!token || !tokenExpiry) {
+      if (result.user?.uid === this.ADMIN_UID) {
+        this.isAdminLoggedInSubject.next(true);
+        localStorage.setItem('adminLoggedIn', 'true');
+        return true;
+      } else {
+        await this.logout();
+        return false;
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
       return false;
     }
+  }
 
-    const currentTime = Date.now();
-    if (currentTime > parseInt(tokenExpiry, 10)) {
-      this.logout();
-      return false;
+  async logout(): Promise<void> {
+    try {
+      await signOut(this.auth);
+      this.isAdminLoggedInSubject.next(false);
+      localStorage.removeItem('adminLoggedIn');
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.error('Logout failed:', error);
     }
-
-    return true;
   }
 
   isAdminLoggedIn(): boolean {
-    return this.hasAdminToken();
+    return this.isAdminLoggedInSubject.value;
+  }
+
+  getCurrentUser(): Promise<User | null> {
+    return Promise.resolve(this.auth.currentUser);
   }
 }

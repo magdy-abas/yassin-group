@@ -36,7 +36,7 @@
 </section>
 
 <!-- About Us Section: Defer until viewport -->
-@defer (on viewport) {
+
 <section class="about-us-section py-2">
   <div class="container">
     <h2 class="text-white main-title mb-4">{{ 'ABOUT.TITLE' | translate }}</h2>
@@ -76,9 +76,6 @@
     </div>
   </div>
 </section>
-} @placeholder {
-<div class="placeholder-section">Loading About Us...</div>
-}
 
 
 
@@ -88,8 +85,8 @@
 
 
 
-@defer (on viewport) {
-<section class="our-service py-5" id="services-section">
+
+<section class="our-service py-5" id="services-section" *ngIf="showContactSection">
   <div class="container">
     <h2 class="text-white main-title mb-4">{{ 'SERVICES.TITLE' | translate }}</h2>
     <div class="row">
@@ -122,13 +119,11 @@
     </div>
   </div>
 </section>
-} @placeholder {
-<div class="placeholder-section">Loading Services...</div>
-}
 
 
-@defer (on viewport) {
-<section class="contact-section py-5 overflow-hidden" id="contact-section">
+
+<section class="contact-section py-5 overflow-hidden" id="contact-section" *ngIf="showContactSection">
+
   <div class="container">
     <h2 class="text-white main-title mb-4">{{ 'CONTACT.TITLE' | translate }}</h2>
     <div class="row justify-content-around">
@@ -209,12 +204,9 @@
     </div>
   </div>
 </section>
-} @placeholder {
-<div class="placeholder-section">Loading Contact...</div>
-}
 
 <!-- Footer: Defer until viewport -->
-@defer (on viewport) {
+
 <footer class="footer py-5">
   <div class="container">
     <div class="row gy-4">
@@ -259,6 +251,3 @@
     </div>
   </div>
 </footer>
-} @placeholder {
-<div class="placeholder-section">Loading Footer...</div>
-}

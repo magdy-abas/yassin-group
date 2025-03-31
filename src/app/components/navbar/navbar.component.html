@@ -15,17 +15,17 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/products">
+          <a class="nav-link" (click)="navigateToProductsSection()" style="cursor: pointer;">
             {{ 'NAV.PRODUCTS' | translate }}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="javascript:void(0)" routerLink="/home">
+          <a class="nav-link" href="javascript:void(0)" (click)="navigateToSection('services-section')">
             {{ 'NAV.SERVICE' | translate }}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="javascript:void(0)" routerLink="/home">
+          <a class="nav-link" href="javascript:void(0)" (click)="navigateToSection('contact-section')">
             {{ 'NAV.CONTACT' | translate }}
           </a>
         </li>

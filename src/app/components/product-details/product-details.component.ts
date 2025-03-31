@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FirebaseService } from '../../services/firebase.service';
 import { Product } from '../../../Dtos/productDto';
 
@@ -21,6 +21,7 @@ import { TranslationService } from '../../services/translation.service';
     MatButtonModule,
     MatIconModule,
     NavbarComponent,
+    RouterLink,
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
