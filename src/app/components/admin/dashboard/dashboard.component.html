@@ -5,7 +5,7 @@
       <mat-card-title>{{ isEditing ? 'تعديل المنتج' :'' }}</mat-card-title>
       <div class="flex-grow"></div>
       <button mat-raised-button color="warn" (click)="logout()" class="ms-2">
-        <mat-icon>exit_to_app</mat-icon> تسجيل الخروج
+        تسجيل الخروج
       </button>
       <!-- Reset Button when Editing -->
       <button *ngIf="isEditing" mat-button color="warn" (click)="resetForm()">
@@ -47,10 +47,10 @@
                   <td class="p-3">{{ product.createdAt | date:'short' }}</td>
                   <td class="p-3 text-end">
                     <button mat-icon-button color="primary" (click)="editProduct(product)" matTooltip="تعديل المنتج">
-                      <mat-icon>edit</mat-icon>
+                      <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                     <button mat-icon-button color="warn" (click)="deleteProduct(product.id!)" matTooltip="حذف المنتج">
-                      <mat-icon>delete</mat-icon>
+                      <i class="fa-solid fa-trash"></i>
                     </button>
                   </td>
                 </tr>

@@ -307,10 +307,6 @@ export class DashboardComponent implements OnInit {
   }
 
   async deleteProduct(productId: string) {
-    if (!confirm('Are you sure you want to delete this product?')) {
-      return;
-    }
-
     const productRef = dbRef(this.database, `products/${productId}`);
     const snapshot = await get(productRef);
     if (snapshot.exists()) {
